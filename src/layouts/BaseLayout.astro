@@ -9,6 +9,135 @@ const {
   title = 'Pest Control & Fumigation Across Uganda | Amata Pests Control Heroes',
   description = 'Nationwide pest control and fumigation for homes, hotels and businesses across Uganda. Cockroaches, bed bugs, termites, rodents and snakes. Clear quotes before work starts.',
 } = Astro.props;
+
+const publicSiteUrl = import.meta.env.PUBLIC_SITE_URL;
+const canonicalUrl = publicSiteUrl
+  ? new URL(Astro.url.pathname, publicSiteUrl).toString()
+  : undefined;
+const socialImageUrl = publicSiteUrl
+  ? new URL('/assets/7fdcbba15a0a7e03b0d18bf61b77b310.jpg', publicSiteUrl).toString()
+  : undefined;
+const isHomePage = Astro.url.pathname === '/';
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': publicSiteUrl ? `${publicSiteUrl}/#organization` : '#organization',
+      name: 'Amata Pests Control Heroes (U) Ltd',
+      alternateName: 'Amata Pest Control Heroes',
+      logo: publicSiteUrl
+        ? `${publicSiteUrl}/assets/7fdcbba15a0a7e03b0d18bf61b77b310.jpg`
+        : '/assets/7fdcbba15a0a7e03b0d18bf61b77b310.jpg',
+      telephone: '+256759163839',
+    },
+    {
+      '@type': 'LocalBusiness',
+      '@id': publicSiteUrl ? `${publicSiteUrl}/#localbusiness` : '#localbusiness',
+      name: 'Amata Pests Control Heroes (U) Ltd',
+      description,
+      telephone: '+256759163839',
+      image: socialImageUrl,
+      priceRange: 'UGX',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Loy Plaza, Room L26',
+        addressLocality: 'Kampala',
+        addressCountry: 'UG',
+      },
+      areaServed: [
+        { '@type': 'Country', name: 'Uganda' },
+        { '@type': 'City', name: 'Kampala' },
+      ],
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+          ],
+          opens: '08:00',
+          closes: '18:00',
+        },
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': publicSiteUrl ? `${publicSiteUrl}/#website` : '#website',
+      name: 'Amata Pests Control Heroes',
+      inLanguage: 'en-UG',
+      publisher: { '@id': publicSiteUrl ? `${publicSiteUrl}/#organization` : '#organization' },
+      url: publicSiteUrl,
+    },
+    {
+      '@type': 'WebPage',
+      '@id': canonicalUrl ? `${canonicalUrl}#webpage` : '#webpage',
+      url: canonicalUrl,
+      name: title,
+      description,
+      inLanguage: 'en-UG',
+      isPartOf: { '@id': publicSiteUrl ? `${publicSiteUrl}/#website` : '#website' },
+      about: { '@id': publicSiteUrl ? `${publicSiteUrl}/#localbusiness` : '#localbusiness' },
+    },
+    {
+      '@type': 'Service',
+      '@id': publicSiteUrl ? `${publicSiteUrl}/#service` : '#service',
+      name: 'Pest Control and Fumigation in Uganda',
+      description: 'Pest inspection, fumigation, rodent control and pest prevention for homes, hotels, schools, hospitals and businesses across Uganda.',
+      provider: { '@id': publicSiteUrl ? `${publicSiteUrl}/#localbusiness` : '#localbusiness' },
+      areaServed: { '@type': 'Country', name: 'Uganda' },
+      serviceType: [
+        'Pest control',
+        'Fumigation',
+        'Rodent control',
+        'Snake and lizard control',
+        'Pest prevention training',
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': publicSiteUrl ? `${publicSiteUrl}/#faq` : '#faq',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'How fast can you come?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Call us to arrange an inspection. Availability depends on your location and our schedule.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How much does fumigation cost?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Cost depends on the pest and the size of the property. After a short inspection, we give you a clear price before work starts.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Is treatment safe for children and pets?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Tell us who lives or works in the space. We plan around them and explain how long to stay out of treated areas.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Do you serve my area?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'We serve customers across Uganda, including Kampala and surrounding areas. Call to confirm coverage for your location.',
+          },
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -17,10 +146,23 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#102451" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Amata Pests Control Heroes (U) Ltd" />
     <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:locale" content="en_UG" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Amata Pests Control Heroes" />
+    {socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+    {socialImageUrl && <meta property="og:image:alt" content="Amata Pest Control Heroes logo" />}
+    <meta name="twitter:card" content={socialImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
+    {socialImageUrl && <meta name="twitter:image:alt" content="Amata Pest Control Heroes logo" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,6 +171,9 @@ const {
       rel="stylesheet"
     />
     <title>{title}</title>
+    {isHomePage && (
+      <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    )}
   </head>
   <body class={Astro.url.pathname === '/' ? 'home-page' : undefined}>
     <a class="skip-link desktop-skip-link" href="#main-content">Skip to content</a>
