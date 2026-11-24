@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteHeader from './SiteHeader.astro';
+
+const { title } = Astro.props;
+---
+
+<BaseLayout title={`${title} | Amata Pests Control Heroes`}>
+  <div style="font-family:'Public Sans',system-ui,sans-serif;color:#0F172A;background:#fff;font-size:17px">
+    <SiteHeader />
+    <main id="main-content" aria-label={title}>
+      <span id="mobile-main-content"></span>
+    </main>
+    <SiteFooter />
+  </div>
+</BaseLayout>

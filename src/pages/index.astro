@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DesignSections from '../components/DesignSections.astro';
+import MobileDesign from '../components/MobileDesign.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+---
+
+<BaseLayout>
+  <div class="desktop-design">
+    <div
+      class="design-page"
+      style="font-family:'Public Sans',system-ui,sans-serif;color:#0F172A;background:#fff;font-size:17px"
+    >
+      <SiteHeader />
+      <main id="main-content">
+        <DesignSections />
+      </main>
+      <SiteFooter />
+    </div>
+  </div>
+  <MobileDesign />
+</BaseLayout>

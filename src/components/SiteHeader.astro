@@ -1,0 +1,65 @@
+---
+import { designHeaderMarkup } from '../data/designSource.js';
+---
+
+<div class="design-source-header" set:html={designHeaderMarkup}></div>
+
+<style is:global>
+  .site-brand {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .site-brand__logo {
+    display: block;
+    width: 58px;
+    height: 58px;
+    flex: none;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .site-brand__wordmark {
+    display: flex;
+    flex-direction: column;
+    color: #0a1b44;
+    font-size: 15px;
+    line-height: 1.08;
+    white-space: nowrap;
+  }
+
+  .site-brand__wordmark strong {
+    font-weight: 800;
+  }
+
+  .site-brand__wordmark strong:first-child {
+    font-size: 17px;
+  }
+
+  .site-brand__service {
+    color: #c8102e;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+
+  @media (max-width: 720px) {
+    .mobile-design .site-brand {
+      gap: 9px;
+    }
+
+    .mobile-design .site-brand__logo {
+      width: 42px;
+      height: 42px;
+    }
+
+    .mobile-design .site-brand__wordmark {
+      font-size: 12px;
+    }
+
+    .mobile-design .site-brand__wordmark strong:first-child {
+      font-size: 16px;
+    }
+  }
+</style>

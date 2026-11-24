@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import '../styles/responsive.css';
+import '../styles/mobile-reference.css';
+import '../styles/animations.css';
+import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+
+const {
+  title = 'Pest Control & Fumigation in Kampala | Amata Pests Control Heroes',
+  description = 'Fast pest control and fumigation in Kampala for homes, hotels and businesses. Cockroaches, bed bugs, termites, rodents and snakes. Quote before work starts. Call +256 759 163 839.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-UG">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#102451" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Public+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body class={Astro.url.pathname === '/' ? 'home-page' : undefined}>
+    <a class="skip-link desktop-skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link mobile-skip-link" href="#mobile-main-content">Skip to content</a>
+    <slot />
+    <FloatingWhatsApp />
+    <script>
+      const revealTargets = document.querySelectorAll(
+        '.design-source-sections > section, .mobile-design section',
+      );
+
+      if (
+        'IntersectionObserver' in window &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.08, rootMargin: '0px 0px -24px 0px' },
+        );
+
+        for (const target of revealTargets) {
+          target.classList.add('scroll-reveal');
+          observer.observe(target);
+        }
+      }
+    </script>
+  </body>
+</html>
