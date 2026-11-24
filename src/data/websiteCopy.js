@@ -8,13 +8,17 @@ const replacements = [
     'Careful, trained and discreet service for homes, hotels and businesses across [YOUR CITY].',
     'Pest control and fumigation for homes, hotels and businesses in Kisasi and Kampala.',
   ],
+  [
+    'Fumigation and pest control for homes, hotels and businesses in Kisasi and Kampala.',
+    'Pest control and fumigation for homes, hotels and businesses across Uganda, including Kampala and surrounding areas.',
+  ],
   ['Protective gear on every job', 'Careful pest management for homes and businesses'],
   ['A trained team', 'Pest prevention advice for your property'],
-  ['Fast response in [RESPONSE TIME]', 'Responsive pest control across Kampala'],
-  ['What we do', 'Pest control services in Kisasi and Kampala'],
+  ['Fast response in [RESPONSE TIME]', 'Responsive pest control across Uganda'],
+  ['What we do', 'Pest control services across Uganda'],
   [
     'Everything you need to keep pests out and your spaces clean.',
-    'Fumigation and pest management for common household and commercial pests across Kampala.',
+    'Fumigation and pest management for common household and commercial pests across Uganda.',
   ],
   [
     'Cockroaches, bed bugs, ants, mosquitoes and termites treated for homes, offices, hotels and schools.',
@@ -73,7 +77,7 @@ const replacements = [
   ['<h2>Shop</h2>', '<h2>Pest control products</h2>'],
   ['From [PRICE]', 'Request current pricing'],
   ['Order now', 'Ask about this product'],
-  ['Pests we control', 'Common pests we treat in Kampala'],
+  ['Pests we control', 'Common pests we treat across Uganda'],
   [
     'From the kitchen to the roof, we know what to treat.',
     'Pest management for common household and commercial pests, including:',
@@ -92,7 +96,7 @@ const replacements = [
   ['[NAME], [HOTEL OR BUSINESS]', 'Amata Pest Control Heroes'],
   [
     '<summary>How fast can you come?</summary><p>[ADD ANSWER]</p>',
-    '<summary>How soon can you provide pest control?</summary><p>Availability depends on your location, the pest issue and our schedule. Call +256 759 163 839 to discuss an inspection time in Kisasi or Kampala.</p>',
+    '<summary>How soon can you provide pest control?</summary><p>Availability depends on your location, the pest issue and our schedule. Call +256 759 163 839 to discuss an inspection time anywhere in Uganda.</p>',
   ],
   [
     '<summary>Is treatment safe for children and pets?</summary><p>[ADD ANSWER]</p>',
@@ -100,13 +104,13 @@ const replacements = [
   ],
   [
     '<summary>What areas do you serve?</summary><p>[ADD ANSWER]</p>',
-    '<summary>What areas do you serve?</summary><p>We provide pest control and fumigation in Kisasi and across Kampala, Uganda. Share your location to confirm coverage and availability.</p>',
+    '<summary>What areas do you serve?</summary><p>We provide pest control and fumigation across Uganda, including Kampala and surrounding areas. Share your location to confirm coverage and availability.</p>',
   ],
   [
     '<summary>Do you deliver pesticides from the shop?</summary><p>[ADD ANSWER]</p>',
     '<summary>Do you deliver pesticides from the shop?</summary><p>Product availability and delivery options can vary. Contact us to check current stock, pricing and whether collection or delivery is available.</p>',
   ],
-  ['Need pests gone fast?', 'Need pest control in Kisasi or Kampala?'],
+  ['Need pests gone fast?', 'Need pest control anywhere in Uganda?'],
   [
     'Call, message or send a request for a free inspection and a clear quote.',
     'Tell us what pest you are dealing with and where. Call or send a request to discuss an inspection and quote.',
@@ -175,7 +179,7 @@ function moveSectionAfter(markup, movingMarker, targetMarker) {
 }
 
 function removeQuotePhoneNumber(markup) {
-  const { start, end } = getSectionRange(markup, 'Need pest control in Kampala?');
+  const { start, end } = getSectionRange(markup, 'Need pest control anywhere in Uganda?');
   const section = markup.slice(start, end);
   const phoneLink = /<a class="btn rd" href="tel:0769244371">[\s\S]*?<\/a>/g;
   const matches = section.match(phoneLink) ?? [];
@@ -190,33 +194,33 @@ function removeQuotePhoneNumber(markup) {
 const pestIcon =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v9M9 11H6m12 0h-3M9 15H6m12 0h-3M10 6a2 2 0 1 1 4 0v10a2 2 0 0 1-4 0zM9 7 7 5m8 2 2-2"></path></svg>';
 
-const pestStrip = `<section style="background:#fff;padding:20px 0"><div class="w"><div role="list" aria-label="Pests we treat" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px">${['Cockroaches', 'Ants', 'Termites', 'Rats', 'Bed bugs', 'Spiders', 'Snakes']
+const pestStrip = `<section style="background:#F7F5F2;padding:18px 0"><div class="w"><div role="list" aria-label="Pests we treat" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px">${['Cockroaches', 'Ants', 'Termites', 'Rats', 'Bed bugs', 'Spiders', 'Snakes']
   .map(
     (pest) =>
-      `<span role="listitem" style="display:inline-flex;align-items:center;gap:7px;padding:8px 10px;background:#F7F5F2;color:#0A1B44;font-size:14px;font-weight:700;white-space:nowrap">${pestIcon}${pest}</span>`,
+      `<span role="listitem" style="display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid #E8E4DF;background:#fff;color:#0A1B44;font-size:14px;font-weight:700;white-space:nowrap">${pestIcon}${pest}</span>`,
   )
   .join('')}</div></div></section>`;
 
-const whySection = `<section style="background:#F7F5F2;padding:72px 0"><div class="w"><div class="bar"><i></i><i></i></div><h2>Why Kampala homes and businesses call us</h2><div class="g" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:28px"><div style="padding:18px;background:#fff;border-top:3px solid #C8102E"><h3>Upfront pricing</h3><p style="margin:10px 0 0;color:#475569;line-height:1.6">You approve the price before work begins.</p></div><div style="padding:18px;background:#fff;border-top:3px solid #1D3FA8"><h3>Treatment plus supplies</h3><p style="margin:10px 0 0;color:#475569;line-height:1.6">Need a product instead of a visit? Buy it at our shop.</p></div><div style="padding:18px;background:#fff;border-top:3px solid #C8102E"><h3>Safe planning</h3><p style="margin:10px 0 0;color:#475569;line-height:1.6">We ask who lives or works in the space and plan around children, pets and food areas.</p></div><div style="padding:18px;background:#fff;border-top:3px solid #1D3FA8"><h3>Every property</h3><p style="margin:10px 0 0;color:#475569;line-height:1.6">Homes, hotels, restaurants, schools, hospitals and offices.</p></div></div></div></section>`;
+const whySection = `<section style="background:#F7F5F2;padding:72px 0"><div class="w"><div class="bar"><i></i><i></i></div><h2>Why Uganda homes and businesses call us</h2><div class="g" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:28px"><div style="padding:18px;background:#fff;border-top:3px solid #C8102E"><h3>Upfront pricing</h3><p style="margin:10px 0 0;color:#475569;line-height:1.6">You approve the price before work begins.</p></div><div style="padding:18px;background:#fff;border-top:3px solid #1D3FA8"><h3>Treatment plus supplies</h3><p style="margin:10px 0 0;color:#475569;line-height:1.6">Need a product instead of a visit? Buy it at our shop.</p></div><div style="padding:18px;background:#fff;border-top:3px solid #C8102E"><h3>Safe planning</h3><p style="margin:10px 0 0;color:#475569;line-height:1.6">We ask who lives or works in the space and plan around children, pets and food areas.</p></div><div style="padding:18px;background:#fff;border-top:3px solid #1D3FA8"><h3>Every property</h3><p style="margin:10px 0 0;color:#475569;line-height:1.6">Homes, hotels, restaurants, schools, hospitals and offices.</p></div></div></div></section>`;
 
-const areasSection = `<section style="background:#F7F5F2;padding:72px 0"><div class="w"><div class="bar"><i></i><i></i></div><h2>Serving Kampala and nearby areas</h2><p style="margin:16px 0 0;color:#475569;font-size:18px;line-height:1.7">Kyanja, Ntinda, Kiwatule, Bukoto and across Kampala. Not sure we cover you? Call and ask.</p></div></section>`;
+const areasSection = `<section style="background:#F7F5F2;padding:72px 0"><div class="w"><div class="bar"><i></i><i></i></div><h2>Serving homes and businesses across Uganda</h2><p style="margin:16px 0 0;color:#475569;font-size:18px;line-height:1.7">Nationwide pest control coverage, including Kampala and surrounding areas. Availability depends on your location. Call and ask.</p></div></section>`;
 
-const faqSection = `<section style="background:#fff;padding:72px 0"><div class="w"><div class="bar"><i></i><i></i></div><h2>Pest control and fumigation FAQs</h2><div style="height:36px"></div><details><summary>How fast can you come?</summary><p>Call us to arrange an inspection. Availability depends on your location and our schedule.</p></details><details><summary>How much does fumigation cost?</summary><p>Cost depends on the pest and the size of the property. After a short inspection, we give you a clear price before work starts.</p></details><details><summary>Is treatment safe for children and pets?</summary><p>Tell us who lives or works in the space. We plan around them and explain how long to stay out of treated areas.</p></details><details><summary>How long does fumigation last?</summary><p>Protection time depends on the pest, treatment and property conditions. We explain follow-up recommendations for the service selected.</p></details><details><summary>Do you serve my area?</summary><p>We serve Kampala and nearby areas. Call to confirm that we cover your location.</p></details><details><summary>Do you deliver pesticides?</summary><p>Ask about delivery in Kampala, call for prices, or collect from our shop at Loy Plaza, Room L26.</p></details></div></section>`;
+const faqSection = `<section style="background:#fff;padding:72px 0"><div class="w"><div class="bar"><i></i><i></i></div><h2>Pest control and fumigation FAQs</h2><div style="height:36px"></div><details><summary>How fast can you come?</summary><p>Call us to arrange an inspection. Availability depends on your location and our schedule.</p></details><details><summary>How much does fumigation cost?</summary><p>Cost depends on the pest and the size of the property. After a short inspection, we give you a clear price before work starts.</p></details><details><summary>Is treatment safe for children and pets?</summary><p>Tell us who lives or works in the space. We plan around them and explain how long to stay out of treated areas.</p></details><details><summary>How long does fumigation last?</summary><p>Protection time depends on the pest, treatment and property conditions. We explain follow-up recommendations for the service selected.</p></details><details><summary>Do you serve my area?</summary><p>We serve customers across Uganda, including Kampala and surrounding areas. Call to confirm coverage for your location.</p></details><details><summary>Do you deliver pesticides?</summary><p>Ask about delivery across Uganda, call for prices, or collect from our shop at Loy Plaza, Room L26.</p></details></div></section>`;
 
 const approvedCopy = [
-  ['Pest control in Kisasi, Kampala', 'Pest Control and Fumigation in Kampala'],
+  ['Pest control in Kisasi, Kampala', 'Pest Control and Fumigation Across Uganda'],
   ['Pest control and fumigation', 'Fumigation and pest control'],
   ['Rodent management', 'Rodent control'],
   ['Pesticide sales', 'Pesticides and sprayers'],
   ['Feminine sanitary hygiene', 'Sanitary bin and washroom hygiene'],
   [
     'Pest control and fumigation for homes, hotels and businesses in Kisasi and Kampala.',
-    'We get rid of cockroaches, bed bugs, termites, rats and snakes in homes, hotels, schools and offices. You get a clear price before any work begins.',
+    'Pest control and fumigation for homes, hotels and businesses across Uganda, including Kampala and surrounding areas. You get a clear price before any work begins.',
   ],
-  ['Pest control services in Kisasi and Kampala', 'Pest control services in Kampala'],
+  ['Pest control services in Kisasi and Kampala', 'Pest control services across Uganda'],
   [
     'Fumigation and pest management for common household and commercial pests across Kampala.',
-    'One team for treatment, prevention and supplies.',
+    'One team for nationwide treatment, prevention and supplies.',
   ],
   [
     'Fumigation and pest control options for cockroaches, bed bugs, ants, mosquitoes and termites in homes, offices, hotels and schools.',
@@ -264,7 +268,7 @@ const approvedCopy = [
     'Help staff recognize pest activity, strengthen hygiene routines and follow prevention practices in kitchens, guest rooms and shared spaces.',
     'Help your staff spot pest activity early and keep kitchens, guest rooms and shared spaces clean.',
   ],
-  ['Hotels, restaurants and schools in Kampala', 'Hotels, restaurants and schools'],
+  ['Hotels, restaurants and schools in Kampala', 'Hotels, restaurants and schools across Uganda'],
   ['Ask about staff training', 'Book staff training'],
   ['Pest control products', 'Pesticides, sprayers and rodent control products'],
   [
@@ -279,10 +283,10 @@ const approvedCopy = [
   ['About Amata Pest Control Heroes', 'About Amata Pests Control Heroes'],
   [
     'Amata Pest Control Heroes provides pest control and fumigation for homes, hotels and businesses in Kisasi and across Kampala. We assess pest concerns, explain treatment options and share practical prevention advice for your property.',
-    'We are a Kampala pest control and fumigation company serving homes, hotels and businesses. We inspect first, explain your options and agree the price before we start. Then we help you keep the pests away.<br><br><span style="font-weight:700;color:#0A1B44">"Good pest control starts with a proper inspection and a clear price."</span>',
+    'We are a Uganda pest control and fumigation company serving homes, hotels and businesses across the country, with local service available in Kampala and surrounding areas. We inspect first, explain your options and agree the price before we start. Then we help you keep the pests away.<br><br><span style="font-weight:700;color:#0A1B44">"Good pest control starts with a proper inspection and a clear price."</span>',
   ],
-  ['Serving Kisasi and nearby communities in Kampala, Uganda', 'Kampala, Uganda'],
-  ['Need pest control in Kisasi or Kampala?', 'Need pest control in Kampala?'],
+  ['Serving Kisasi and nearby communities in Kampala, Uganda', 'Serving customers across Uganda'],
+  ['Need pest control in Kisasi or Kampala?', 'Need pest control anywhere in Uganda?'],
   [
     'Tell us what pest you are dealing with and where. Call or send a request to discuss an inspection and quote.',
     'Tell us the pest and where you saw it. We will call you back to arrange an inspection and quote.',
@@ -328,7 +332,7 @@ export function applyWebsiteCopy(markup) {
   let updatedMarkup = applyLegacyWebsiteCopy(markup);
 
   updatedMarkup = removeSection(updatedMarkup, 'Careful pest management for homes and businesses');
-  updatedMarkup = removeSection(updatedMarkup, 'Common pests we treat in Kampala');
+  updatedMarkup = removeSection(updatedMarkup, 'Common pests we treat across Uganda');
   updatedMarkup = removeSection(
     updatedMarkup,
     'Effective pest control starts with a careful inspection, a clear treatment plan and practical prevention advice.',
@@ -338,6 +342,11 @@ export function applyWebsiteCopy(markup) {
   for (const [source, copy] of approvedCopy) {
     updatedMarkup = updatedMarkup.replaceAll(source, copy);
   }
+
+  updatedMarkup = updatedMarkup.replaceAll(
+    'Fumigation and pest control for homes, hotels and businesses in Kisasi and Kampala.',
+    'Pest control and fumigation for homes, hotels and businesses across Uganda, including Kampala and surrounding areas.',
+  );
 
   updatedMarkup = removeQuotePhoneNumber(updatedMarkup);
 
@@ -406,7 +415,7 @@ export function applyWebsiteCopy(markup) {
 
   updatedMarkup = insertAfterSection(
     updatedMarkup,
-    'Pest Control and Fumigation in Kampala',
+    'Pest Control and Fumigation Across Uganda',
     pestStrip,
   );
   updatedMarkup = insertAfterSection(updatedMarkup, 'Three steps. No surprises.', whySection);

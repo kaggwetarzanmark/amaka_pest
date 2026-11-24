@@ -6,8 +6,8 @@ import '../styles/animations.css';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 
 const {
-  title = 'Pest Control & Fumigation in Kampala | Amata Pests Control Heroes',
-  description = 'Fast pest control and fumigation in Kampala for homes, hotels and businesses. Cockroaches, bed bugs, termites, rodents and snakes. Quote before work starts. Call +256 759 163 839.',
+  title = 'Pest Control & Fumigation Across Uganda | Amata Pests Control Heroes',
+  description = 'Nationwide pest control and fumigation for homes, hotels and businesses across Uganda. Cockroaches, bed bugs, termites, rodents and snakes. Clear quotes before work starts.',
 } = Astro.props;
 ---
 
@@ -36,29 +36,70 @@ const {
     <slot />
     <FloatingWhatsApp />
     <script>
+      import { animate, inView } from 'motion';
+
       const revealTargets = document.querySelectorAll(
         '.design-source-sections > section, .mobile-design section',
       );
 
-      if (
-        'IntersectionObserver' in window &&
-        !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      ) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-revealed');
-                observer.unobserve(entry.target);
-              }
-            }
-          },
-          { threshold: 0.08, rootMargin: '0px 0px -24px 0px' },
-        );
+      const menuButton = document.querySelector('.mobile-menu-toggle');
+      const mobileMenu = document.querySelector('#mobile-site-nav');
+
+      if (menuButton instanceof HTMLButtonElement && mobileMenu instanceof HTMLElement) {
+        const closeMenu = () => {
+          mobileMenu.hidden = true;
+          menuButton.setAttribute('aria-expanded', 'false');
+          menuButton.setAttribute('aria-label', 'Open menu');
+        };
+
+        menuButton.addEventListener('click', () => {
+          const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+          mobileMenu.hidden = isExpanded;
+          menuButton.setAttribute('aria-expanded', String(!isExpanded));
+          menuButton.setAttribute('aria-label', isExpanded ? 'Open menu' : 'Close menu');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', closeMenu);
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+            closeMenu();
+            menuButton.focus();
+          }
+        });
+
+        document.addEventListener('click', (event) => {
+          if (
+            event.target instanceof Node &&
+            !mobileMenu.contains(event.target) &&
+            !menuButton.contains(event.target)
+          ) {
+            closeMenu();
+          }
+        });
+      }
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const revealedSections = new WeakSet<Element>();
 
         for (const target of revealTargets) {
-          target.classList.add('scroll-reveal');
-          observer.observe(target);
+          target.classList.add('motion-reveal');
+          inView(
+            target,
+            (element) => {
+              if (!revealedSections.has(element)) {
+                revealedSections.add(element);
+                animate(
+                  element,
+                  { opacity: [0, 1], y: [12, 0] },
+                  { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+                );
+              }
+            },
+            { amount: 0.08, margin: '0px 0px -24px 0px' },
+          );
         }
       }
     </script>

@@ -1,5 +1,8 @@
 ---
-import { mobileDesignMarkup } from '../data/mobileDesignSource.js';
+import { mobileDesignMarkup, mobileHeaderMarkup } from '../data/mobileDesignSource.js';
 ---
 
-<div id="mobile-main-content" class="mobile-design" set:html={mobileDesignMarkup}></div>
+<div id="mobile-main-content" class="mobile-design">
+  <div class="mobile-source-header" set:html={mobileHeaderMarkup}></div>
+  <div set:html={mobileDesignMarkup}></div>
+</div>

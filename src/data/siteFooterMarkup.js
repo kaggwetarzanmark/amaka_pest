@@ -9,7 +9,7 @@ export const siteFooterMarkup = `<footer class="site-footer">
           <strong class="site-footer__service">PEST CONTROL</strong>
         </span>
       </a>
-      <p class="site-footer__description">Pest control and fumigation for homes, hotels and businesses in Kampala.</p>
+      <p class="site-footer__description">Pest control and fumigation for homes, hotels and businesses across Uganda.</p>
     </div>
     <nav class="site-footer__navigation" aria-label="Footer navigation">
       <h2>Explore</h2>
@@ -30,6 +30,6 @@ export const siteFooterMarkup = `<footer class="site-footer">
   </div>
   <div class="site-footer__bottom">
     <p>&copy; Amata Pest Control</p>
-    <p>Serving Kyanja, Ntinda, Kiwatule, Bukoto and across Kampala.</p>
+    <p>Serving customers across Uganda, including Kampala and surrounding areas.</p>
   </div>
 </footer>`;

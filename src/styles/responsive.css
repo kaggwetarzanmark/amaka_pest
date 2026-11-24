@@ -22,7 +22,8 @@ main {
 }
 
 .mobile-design,
-.mobile-skip-link {
+.mobile-skip-link,
+.mobile-source-header {
   display: none;
 }
 
@@ -92,6 +93,14 @@ main {
 @media (max-width: 720px) {
   .desktop-design {
     display: none;
+  }
+
+  .design-source-header {
+    display: none;
+  }
+
+  .mobile-source-header {
+    display: block;
   }
 
   .mobile-design {

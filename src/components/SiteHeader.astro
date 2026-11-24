@@ -1,8 +1,12 @@
 ---
 import { designHeaderMarkup } from '../data/designSource.js';
+import { mobileHeaderMarkup } from '../data/mobileDesignSource.js';
+
+const { desktop = true, mobile = true } = Astro.props;
 ---
 
-<div class="design-source-header" set:html={designHeaderMarkup}></div>
+{desktop && <div class="design-source-header" set:html={designHeaderMarkup}></div>}
+{mobile && <div class="mobile-source-header" set:html={mobileHeaderMarkup}></div>}
 
 <style is:global>
   .site-brand {

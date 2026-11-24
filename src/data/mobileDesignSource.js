@@ -53,6 +53,28 @@ mobileDesignMarkup =
 
 mobileDesignMarkup = mobileDesignMarkup.replaceAll('href="#mobile-shop"', 'href="/shop/"');
 
+const mobileMenuTogglePattern =
+  /<a href="#menu" aria-label="Menu" style="[^"]*">([\s\S]*?)<\/a>/;
+const mobileMenuToggleMatch = mobileDesignMarkup.match(mobileMenuTogglePattern);
+
+if (!mobileMenuToggleMatch) {
+  throw new Error('Could not make the mobile navigation menu interactive.');
+}
+
+mobileDesignMarkup = mobileDesignMarkup.replace(
+  mobileMenuTogglePattern,
+  '<button class="mobile-menu-toggle" type="button" aria-label="Open menu" aria-controls="mobile-site-nav" aria-expanded="false" style="width:48px;height:48px;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;padding:0;border:0;background:transparent;cursor:pointer"><i aria-hidden="true" style="width:26px;height:3px;background:#0A1B44"></i><i aria-hidden="true" style="width:26px;height:3px;background:#C8102E"></i><i aria-hidden="true" style="width:26px;height:3px;background:#1D3FA8"></i></button>',
+);
+
+const mobileMenu =
+  '<nav id="mobile-site-nav" class="mobile-menu-panel" aria-label="Main navigation" hidden><a href="/services/">Services</a><a href="/shop/">Shop</a><a href="/training/">Training</a><a href="/about/">About</a><a href="/faq/">FAQ</a></nav>';
+
+if (!mobileDesignMarkup.includes('</header>')) {
+  throw new Error('Could not insert the mobile navigation links.');
+}
+
+mobileDesignMarkup = mobileDesignMarkup.replace('</header>', `${mobileMenu}</header>`);
+
 const legacyFooterInfo =
   /<p style="margin:36px 0 0;color:#C9D7F8;font-size:14px;line-height:1.7"><b style="color:#fff">Amata Pests Control Heroes \(U\) Ltd<\/b><br>[\s\S]*?<\/p>/;
 const mobileStickyMarker =
@@ -69,5 +91,17 @@ if (!mobileDesignMarkup.includes(mobileStickyMarker)) {
 }
 
 mobileDesignMarkup = mobileDesignMarkup.replace(mobileStickyMarker, `${siteFooterMarkup}${mobileStickyMarker}`);
+
+const mobileHeaderStart = mobileDesignMarkup.indexOf('<div style="display:flex;height:8px">');
+const mobileHeaderEnd =
+  mobileDesignMarkup.indexOf('</header>', mobileHeaderStart) + '</header>'.length;
+
+if (mobileHeaderStart < 0 || mobileHeaderEnd < '</header>'.length) {
+  throw new Error('Could not extract the shared mobile navigation.');
+}
+
+export const mobileHeaderMarkup = mobileDesignMarkup.slice(mobileHeaderStart, mobileHeaderEnd);
+mobileDesignMarkup =
+  mobileDesignMarkup.slice(0, mobileHeaderStart) + mobileDesignMarkup.slice(mobileHeaderEnd);
 
 export { mobileDesignMarkup };

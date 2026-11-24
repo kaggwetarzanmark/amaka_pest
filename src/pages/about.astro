@@ -12,7 +12,7 @@ import { mobileAboutMarkup } from '../data/mobileDesignSource.js';
       class="design-page"
       style="font-family:'Public Sans',system-ui,sans-serif;color:#0F172A;background:#fff;font-size:17px"
     >
-      <SiteHeader />
+      <SiteHeader mobile={false} />
       <main id="main-content">
         <div class="design-source-sections" set:html={designAboutMarkup}></div>
       </main>
@@ -24,7 +24,7 @@ import { mobileAboutMarkup } from '../data/mobileDesignSource.js';
       class="design-page"
       style="font-family:'Public Sans',system-ui,sans-serif;color:#0F172A;background:#fff;font-size:16px"
     >
-      <SiteHeader />
+      <SiteHeader desktop={false} />
       <main>
         <div class="design-source-sections" set:html={mobileAboutMarkup}></div>
       </main>

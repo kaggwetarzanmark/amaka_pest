@@ -6,13 +6,16 @@ import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Pest Control &amp; Fumigation Across Uganda | Amata Pests Control Heroes"
+  description="Nationwide pest control and fumigation for homes, hotels and businesses across Uganda. Cockroaches, bed bugs, termites, rodents and snakes. Clear quotes before work starts."
+>
   <div class="desktop-design">
     <div
       class="design-page"
       style="font-family:'Public Sans',system-ui,sans-serif;color:#0F172A;background:#fff;font-size:17px"
     >
-      <SiteHeader />
+      <SiteHeader mobile={false} />
       <main id="main-content">
         <DesignSections />
       </main>
