@@ -37,6 +37,20 @@ for (const id of ['q1', 'q2', 'q3', 'q4', 'q5']) {
     .replaceAll(`for="${id}"`, `for="mobile-${id}"`);
 }
 
+const mobileAboutStart = mobileDesignMarkup.indexOf('<section id="mobile-a"');
+const mobileAboutEnd =
+  mobileDesignMarkup.indexOf('</section>', mobileAboutStart) + '</section>'.length;
+
+if (mobileAboutStart < 0 || mobileAboutEnd < '</section>'.length) {
+  throw new Error('Could not extract the mobile About section for its dedicated page.');
+}
+
+export const mobileAboutMarkup = mobileDesignMarkup
+  .slice(mobileAboutStart, mobileAboutEnd)
+  .replaceAll('src="./assets/', 'src="/assets/');
+mobileDesignMarkup =
+  mobileDesignMarkup.slice(0, mobileAboutStart) + mobileDesignMarkup.slice(mobileAboutEnd);
+
 mobileDesignMarkup = mobileDesignMarkup.replaceAll('href="#mobile-shop"', 'href="/shop/"');
 
 const legacyFooterInfo =

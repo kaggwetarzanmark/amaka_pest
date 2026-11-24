@@ -44,6 +44,20 @@ const navigationAnchors = {
 };
 let headerMarkup = content.slice(headerStart, navEnd);
 let sectionsMarkup = content.slice(navEnd, footerStart);
+const aboutSectionStart = sectionsMarkup.indexOf('<section id="a"');
+const aboutSectionEnd =
+  sectionsMarkup.indexOf('</section>', aboutSectionStart) + '</section>'.length;
+
+if (aboutSectionStart < 0 || aboutSectionEnd < '</section>'.length) {
+  throw new Error('Could not extract the About section for its dedicated page.');
+}
+
+export const designAboutMarkup = sectionsMarkup
+  .slice(aboutSectionStart, aboutSectionEnd)
+  .replaceAll('src="./assets/', 'src="/assets/');
+sectionsMarkup =
+  sectionsMarkup.slice(0, aboutSectionStart) + sectionsMarkup.slice(aboutSectionEnd);
+
 const desktopBrandPattern =
   /<div style="display:flex;align-items:center;gap:14px"><img [^>]+><b[^>]*>[\s\S]*?<\/b><\/div>/;
 

@@ -26,6 +26,69 @@ main {
   display: none;
 }
 
+@media (min-width: 721px) {
+  .design-source-sections > section {
+    padding-top: 76px !important;
+    padding-bottom: 76px !important;
+  }
+
+  .design-source-sections > section:first-child {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .design-source-sections > section:nth-of-type(2) {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+
+  .design-source-sections > section:last-of-type {
+    padding-top: 68px !important;
+    padding-bottom: 68px !important;
+  }
+
+  .design-source-sections > section:first-child .g {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr) !important;
+    gap: clamp(32px, 4vw, 56px) !important;
+  }
+
+  .design-source-sections > section:first-child h1 {
+    max-width: 610px;
+    font-size: clamp(42px, 3.5vw, 50px) !important;
+    line-height: 1.04 !important;
+  }
+
+  .design-source-sections > section:first-child .g > div:first-child > p {
+    margin: 18px 0 26px !important;
+    font-size: 18px !important;
+    line-height: 1.6 !important;
+  }
+
+  .design-source-sections > section:first-child .g > div:first-child > div:last-child {
+    flex-wrap: wrap !important;
+    align-items: center;
+    gap: 10px !important;
+  }
+
+  .design-source-sections > section:first-child .g > div:first-child > div:last-child > a {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  .design-source-sections > section:first-child .g > div:first-child > div:last-child > p {
+    flex: 0 0 100%;
+    margin-top: 2px !important;
+  }
+
+  .design-source-sections > section:first-child .g > div:last-child {
+    padding: 20px 20px 20px 0 !important;
+  }
+
+  .design-source-sections > section:first-child .g > div:last-child img {
+    height: clamp(360px, 34vw, 460px) !important;
+  }
+}
+
 @media (max-width: 720px) {
   .desktop-design {
     display: none;
@@ -61,8 +124,15 @@ main {
   }
 
   .design-source-header > div:first-child > div:last-child {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
     padding: 8px 14px !important;
     font-size: 12px !important;
+    white-space: normal !important;
+  }
+
+  .design-source-header > div:first-child > div:last-child a {
+    white-space: nowrap;
   }
 
   .design-source-header nav.w {
