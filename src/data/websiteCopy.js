@@ -363,7 +363,7 @@ export function applyWebsiteCopy(markup) {
   );
 
   const heroNote =
-    '<p style="width:100%;margin:12px 0 0;color:#475569;font-size:14px;line-height:1.5">Shop at Loy Plaza, Room L26 &middot; Licensed and registered</p>';
+    '<p style="width:100%;margin:12px 0 0;color:#475569;font-size:14px;line-height:1.5">Shop at Loy Plaza, Room L26</p>';
   updatedMarkup = updatedMarkup.replaceAll('Shop pesticides</a>', `Shop pesticides</a>${heroNote}`);
 
   const desktopTopBarContacts =

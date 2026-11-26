@@ -1,5 +1,116 @@
 ---
-import BlankNavigationPage from '../components/BlankNavigationPage.astro';
+import ContentPage from '../components/ContentPage.astro';
+import EditorialHero from '../components/EditorialHero.astro';
+
+const pageTitle = 'Pest Control & Fumigation FAQs in Uganda | Amata';
+const pageDescription =
+  'Answers about Amata pest control and fumigation, service areas, quotes, safety preparation, product enquiries and training in Uganda.';
+
+const questions = [
+  {
+    question: 'Which areas in Uganda do you serve?',
+    answer:
+      'Amata accepts enquiries from across Uganda. Availability depends on your district, service and schedule. Share your town or district so we can confirm whether we can assist.',
+  },
+  {
+    question: 'How do I get a pest-control quote?',
+    answer:
+      'Call or WhatsApp with the pest, location, property type and affected areas. The price depends on the issue and proposed work. You will be given a quote to review before work begins.',
+  },
+  {
+    question: 'How soon can you attend?',
+    answer:
+      'Timing depends on your location, the service requested and the team schedule. Contact us with your area and preferred timing to check availability.',
+  },
+  {
+    question: 'How should I prepare my home or workplace?',
+    answer:
+      'Preparation differs by pest, product and treatment. We explain the instructions relevant to the service before work begins. Ask about children, pets, food areas and re-entry for your specific treatment.',
+  },
+  {
+    question: 'Is pest treatment safe for children and pets?',
+    answer:
+      'Safety depends on the product, how it is applied and the site. Tell us who uses the property, follow the product label and the instructions provided, and keep people and pets away as directed.',
+  },
+  {
+    question: 'Do you treat bed bugs, termites, cockroaches and ants?',
+    answer:
+      'These are among the common pest concerns Amata handles. The appropriate service depends on the signs, affected areas and property. Contact us to discuss an assessment and plan.',
+  },
+  {
+    question: 'What should I do if I see a snake?',
+    answer:
+      'Keep a safe distance, do not try to catch or handle it, and keep other people and pets away. Call to ask about help in your area. If someone has been bitten, seek urgent medical care immediately.',
+  },
+  {
+    question: 'Can I buy pesticides, sprayers and protective gear?',
+    answer:
+      'Contact the shop to check current stock, price, intended use and label information. Collection is from Loy Plaza, Room L26, Kampala. Ask whether delivery is available for your location.',
+  },
+  {
+    question: 'Do you offer pest-prevention training?',
+    answer:
+      'Training enquiries are welcome from hotels, restaurants, schools and facility teams. Contact us to discuss team needs, session topics, availability and whether any certificate or accreditation is included.',
+  },
+  {
+    question: 'Do you guarantee that pests will never return?',
+    answer:
+      'Pest activity can depend on site conditions and reinfestation. Amata discusses the proposed service and any follow-up terms before work begins; ask for the terms that apply to your specific quote.',
+  },
+];
 ---
 
-<BlankNavigationPage title="FAQ" />
+<ContentPage title={pageTitle} description={pageDescription}>
+  <EditorialHero
+    eyebrow="QUESTIONS AND ANSWERS"
+    title="Pest control questions, answered clearly"
+    description="Find out how to request a quote, check coverage, prepare for a treatment and ask about products or training. For advice specific to your property, contact the Amata team."
+    imageLabel="Amata technician explaining pest-control preparation"
+  />
+
+  <section class="editorial-section" aria-labelledby="faq-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="faq-title">Frequently asked questions</h2>
+        <p>
+          Answers are general. Your service plan and safety instructions depend on the pest,
+          product, property and location.
+        </p>
+      </div>
+      <div class="editorial-faq">
+        {questions.map((item) => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+      <p class="editorial-provenance" style="margin-top:24px">
+        For independent information on pesticide safety, consult the World Health Organization’s
+        <a
+          href="https://www.who.int/news-room/questions-and-answers/item/chemical-safety-pesticides"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Chemical safety: Pesticides</a>. Follow the label and the instructions for your specific service.
+      </p>
+    </div>
+  </section>
+
+  <section class="editorial-section editorial-section--soft">
+    <div class="editorial-section__inner editorial-callout">
+      <div>
+        <h2>Need an answer for your property?</h2>
+        <p>Tell us the pest, your location and what you have noticed.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a class="editorial-button" href="tel:+256759163839">Call +256 759 163 839</a>
+        <a
+          class="editorial-button"
+          href="https://wa.me/256759163839?text=Hello%20Amata%2C%20I%20have%20a%20question%20about%20pest%20control."
+          target="_blank"
+          rel="noopener noreferrer"
+        >WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</ContentPage>

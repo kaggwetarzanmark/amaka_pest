@@ -1,0 +1,148 @@
+---
+import ImagePlaceholder from './ImagePlaceholder.astro';
+
+const { eyebrow, title, description, imageLabel } = Astro.props;
+---
+
+<section class="editorial-hero" aria-labelledby="editorial-hero-title">
+  <div class="editorial-hero__inner">
+    <div class="editorial-hero__copy">
+      <p class="editorial-hero__eyebrow"><span></span>{eyebrow}</p>
+      <h1 id="editorial-hero-title">{title}</h1>
+      <p class="editorial-hero__description">{description}</p>
+      <div class="editorial-hero__actions">
+        <a class="editorial-hero__button" href="tel:+256759163839">Call +256 759 163 839</a>
+        <a
+          class="editorial-hero__text-link"
+          href="https://wa.me/256759163839?text=Hello%20Amata%2C%20I%20would%20like%20to%20ask%20about%20your%20services."
+          target="_blank"
+          rel="noopener noreferrer"
+        >Ask on WhatsApp</a>
+      </div>
+    </div>
+    <ImagePlaceholder label={imageLabel} aspectRatio="4 / 3" tone="blue" />
+  </div>
+  <div class="editorial-hero__stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+</section>
+
+<style is:global>
+  .editorial-hero {
+    overflow: hidden;
+    background: #f7f5f2;
+    color: #0a1b44;
+  }
+
+  .editorial-hero__inner {
+    display: grid;
+    width: min(1120px, 100%);
+    min-height: 420px;
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+    align-items: center;
+    gap: clamp(30px, 6vw, 76px);
+    margin: 0 auto;
+    padding: 58px 32px;
+  }
+
+  .editorial-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 16px;
+    color: #c8102e;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .editorial-hero__eyebrow span {
+    width: 28px;
+    height: 3px;
+    background: #c8102e;
+  }
+
+  .editorial-hero h1 {
+    max-width: 670px;
+    margin: 0;
+    color: #0a1b44;
+    font-size: clamp(38px, 4.8vw, 58px);
+    line-height: 1.05;
+  }
+
+  .editorial-hero__description {
+    max-width: 630px;
+    margin: 18px 0 24px;
+    color: #475569;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .editorial-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+  }
+
+  .editorial-hero__button {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    padding: 11px 17px;
+    background: #c8102e;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .editorial-hero__button:hover {
+    background: #a20d25;
+  }
+
+  .editorial-hero__text-link {
+    color: #1d3fa8;
+    font-size: 14px;
+    font-weight: 800;
+    text-underline-offset: 3px;
+  }
+
+  .editorial-hero__inner > .image-slot {
+    width: calc(100% - 24px);
+    margin: 12px;
+    box-shadow: 12px 12px 0 #c8102e, -12px -12px 0 #1d3fa8;
+  }
+
+  .editorial-hero__stripe {
+    display: flex;
+    height: 5px;
+  }
+
+  .editorial-hero__stripe span:first-child,
+  .editorial-hero__stripe span:last-child {
+    flex: 1;
+    background: #c8102e;
+  }
+
+  .editorial-hero__stripe span:nth-child(2) {
+    flex: 2;
+    background: #1d3fa8;
+  }
+
+  @media (max-width: 720px) {
+    .editorial-hero__inner {
+      min-height: 0;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 28px;
+      padding: 42px 20px 36px;
+    }
+
+    .editorial-hero h1 {
+      font-size: clamp(36px, 9vw, 48px);
+    }
+
+    .editorial-hero__inner > .image-slot {
+      box-shadow: 8px 8px 0 #c8102e, -8px -8px 0 #1d3fa8;
+    }
+  }
+</style>

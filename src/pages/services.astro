@@ -1,5 +1,100 @@
 ---
-import BlankNavigationPage from '../components/BlankNavigationPage.astro';
+import ContentPage from '../components/ContentPage.astro';
+import EditorialHero from '../components/EditorialHero.astro';
+import { services } from '../data/services.js';
+
+const pageTitle = 'Pest Control Services Across Uganda | Amata';
+const pageDescription =
+  'Explore Amata pest control, fumigation, rodent control, snake and lizard response, washroom hygiene and team training services across Uganda. Confirm coverage and request a quote.';
+const publicSiteUrl = import.meta.env.PUBLIC_SITE_URL;
+
+const serviceListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Pest control and facility services by Amata in Uganda',
+  itemListElement: services.map((service, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: service.name,
+    url: publicSiteUrl ? new URL(`/services/${service.slug}/`, publicSiteUrl).toString() : undefined,
+  })),
+};
 ---
 
-<BlankNavigationPage title="Services" />
+<ContentPage title={pageTitle} description={pageDescription} structuredData={serviceListSchema}>
+  <EditorialHero
+    eyebrow="AMATA SERVICES"
+    title="Pest control and facility services across Uganda"
+    description="Explore pest control, fumigation, rodent management, product enquiries, washroom hygiene and team training. Tell us your location and what you need so we can confirm availability and discuss next steps."
+    imageLabel="Amata pest control service in progress"
+  />
+
+  <section class="editorial-section" aria-labelledby="services-list-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="services-list-title">Choose the service you need</h2>
+        <p>
+          Each property and pest issue is different. Open a service to understand what information
+          to share and what to expect before you book.
+        </p>
+      </div>
+      <div class="editorial-grid">
+        {services.map((service) => (
+          <article class="editorial-card">
+            <h3>{service.name}</h3>
+            <p>{service.shortDescription}</p>
+            <a href={`/services/${service.slug}/`}>Service details and process</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="editorial-section editorial-section--soft" aria-labelledby="service-process-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="service-process-title">A clear process before work begins</h2>
+        <p>
+          We gather details first so the proposed service, preparation and quote fit the property and
+          the issue you describe.
+        </p>
+      </div>
+      <ol class="editorial-steps">
+        <li>
+          <span class="editorial-steps__number">1</span>
+          <div>
+            <h3>Tell us the pest or service and your location</h3>
+            <p>Include the property type, affected areas and any relevant timing or access details.</p>
+          </div>
+        </li>
+        <li>
+          <span class="editorial-steps__number">2</span>
+          <div>
+            <h3>Discuss an assessment and suitable options</h3>
+            <p>Availability and the recommended approach depend on the service, site and location.</p>
+          </div>
+        </li>
+        <li>
+          <span class="editorial-steps__number">3</span>
+          <div>
+            <h3>Review the quote and instructions</h3>
+            <p>Confirm the price and any preparation or safety information before approving work.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="editorial-section" aria-labelledby="coverage-title">
+    <div class="editorial-section__inner editorial-callout">
+      <div>
+        <h2 id="coverage-title">Need service in your area?</h2>
+        <p>
+          Amata serves customers across Uganda, with its shop at Loy Plaza, Room L26, Kampala.
+          Contact us to confirm availability for your district and service.
+        </p>
+      </div>
+      <a class="editorial-button" href="tel:+256759163839">Call +256 759 163 839</a>
+    </div>
+  </section>
+</ContentPage>

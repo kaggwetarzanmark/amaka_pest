@@ -1,5 +1,986 @@
 ---
-import BlankNavigationPage from '../components/BlankNavigationPage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+
+const products = [
+  {
+    name: 'Pesticides',
+    category: 'Treatment',
+    description:
+      'Pest-control products for common household, farm and business needs. Tell us the pest and where you plan to use the product.',
+    detail: 'Ask about suitable products and pack sizes',
+    tone: 'red',
+  },
+  {
+    name: 'Sprayers',
+    category: 'Equipment',
+    description:
+      'Hand and backpack sprayers for home, farm and professional use. Contact us to check available models and capacity options.',
+    detail: 'Ask about sprayer types and capacity',
+    tone: 'blue',
+  },
+  {
+    name: 'Protective gear',
+    category: 'Safety',
+    description:
+      'Gloves, masks and other protective gear for pest-control tasks. Ask our team which options are currently available.',
+    detail: 'Ask about sizes and available gear',
+    tone: 'red',
+  },
+  {
+    name: 'Rodent baits and traps',
+    category: 'Rodent control',
+    description:
+      'Baits and traps for rat and mouse control at home, on the farm or at work. Tell us about the setting so we can help you choose.',
+    detail: 'Ask about bait and trap options',
+    tone: 'blue',
+  },
+];
+
+const whatsappLink = (product: string) =>
+  `https://wa.me/256759163839?text=${encodeURIComponent(
+    `Hello Amata, I would like to ask about ${product}. Please share current availability, sizes and price.`,
+  )}`;
+
+const shopDescription =
+  'Shop pesticides, sprayers, protective gear, rodent baits and traps in Uganda. Contact Amata for current availability, product guidance and prices.';
 ---
 
-<BlankNavigationPage title="Shop" />
+<BaseLayout
+  title="Pest Control Products & Sprayers in Uganda | Amata"
+  description={shopDescription}
+>
+  <div class="shop-page">
+    <SiteHeader />
+    <main id="main-content">
+      <span id="mobile-main-content"></span>
+      <section class="shop-hero" aria-labelledby="shop-title">
+        <div class="shop-hero__inner">
+          <div class="shop-hero__copy">
+            <p class="shop-eyebrow"><span></span> AMATA PEST CONTROL SHOP</p>
+            <h1 id="shop-title">Pest control products for homes, farms and businesses</h1>
+            <p class="shop-hero__description">
+              Find pesticides, sprayers, protective gear and rodent-control supplies. Tell us what
+              you need and we’ll confirm current availability and pricing.
+            </p>
+            <div class="shop-hero__actions">
+              <a class="shop-button shop-button--red" href="#products">Browse products</a>
+              <a
+                class="shop-button shop-button--outline"
+                href={whatsappLink('pest control products')}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ask on WhatsApp
+              </a>
+            </div>
+            <p class="shop-hero__note">Prices and stock confirmed directly by our team.</p>
+          </div>
+          <div class="shop-hero__panel" aria-label="Shop information">
+            <div class="shop-hero__panel-mark" aria-hidden="true">A</div>
+            <p class="shop-hero__panel-label">SHOP WITH AMATA</p>
+            <h2>Get the right product for the job.</h2>
+            <p>Share the pest, location and intended use. We’ll help you check suitable options.</p>
+            <div class="shop-hero__panel-rule"></div>
+            <p class="shop-hero__panel-contact">
+              <span>Call our team</span>
+              <a href="tel:+256759163839">+256 759 163 839</a>
+            </p>
+          </div>
+        </div>
+        <div class="shop-hero__stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+      </section>
+
+      <section class="shop-benefits" aria-label="Shop benefits">
+        <div class="shop-benefits__inner">
+          <div><span class="shop-benefits__number">01</span><span>Ask about current stock</span></div>
+          <div><span class="shop-benefits__number">02</span><span>Get product guidance</span></div>
+          <div><span class="shop-benefits__number">03</span><span>Confirm pickup or delivery</span></div>
+        </div>
+      </section>
+
+      <section id="products" class="shop-products" aria-labelledby="products-title">
+        <div class="shop-container">
+          <div class="shop-section-heading">
+            <div class="shop-section-heading__accent" aria-hidden="true">
+              <span></span><span></span>
+            </div>
+            <p class="shop-eyebrow shop-eyebrow--dark">WHAT YOU’RE LOOKING FOR</p>
+            <h2 id="products-title">Browse the shop</h2>
+            <p>
+              Product options, brands and pack sizes can change. Message or call to confirm what’s
+              available and get a current price.
+            </p>
+          </div>
+
+          <div class="shop-product-grid">
+            {products.map((product) => (
+              <article class={`shop-product-card shop-product-card--${product.tone}`}>
+                <figure class="shop-product-card__visual">
+                  <span class="shop-product-card__badge">{product.category}</span>
+                  <ImagePlaceholder
+                    label={product.name}
+                    aspectRatio="1 / 1"
+                    tone={product.tone}
+                  />
+                </figure>
+                <div class="shop-product-card__body">
+                  <p class="shop-product-card__category">{product.category}</p>
+                  <h3>{product.name}</h3>
+                  <p class="shop-product-card__description">{product.description}</p>
+                  <p class="shop-product-card__detail">{product.detail}</p>
+                  <a
+                    class="shop-product-card__link"
+                    href={whatsappLink(product.name.toLowerCase())}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ask about ${product.name} on WhatsApp`}
+                  >
+                    Ask about this product <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p class="shop-stock-note">
+            <strong>Need a product for a specific pest?</strong> Tell us what you’re dealing with
+            before buying. Use products only as directed on their labels.
+          </p>
+          <p class="shop-source-note">
+            For independent information on pesticide safety, see the World Health Organization’s
+            <a
+              href="https://www.who.int/news-room/questions-and-answers/item/chemical-safety-pesticides"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Chemical safety: Pesticides</a>. Product labels provide the directions and precautions
+            for each specific product.
+          </p>
+        </div>
+      </section>
+
+      <section class="shop-order" aria-labelledby="order-title">
+        <div class="shop-container shop-order__inner">
+          <div>
+            <p class="shop-eyebrow">HOW TO ORDER</p>
+            <h2 id="order-title">Three steps to check your order</h2>
+          </div>
+          <ol class="shop-order__steps">
+            <li><span>1</span><div><h3>Tell us what you need</h3><p>Share the product, quantity and intended use.</p></div></li>
+            <li><span>2</span><div><h3>Confirm price and availability</h3><p>We’ll check current stock and discuss suitable options.</p></div></li>
+            <li><span>3</span><div><h3>Arrange collection or delivery</h3><p>Ask our team about pickup at Loy Plaza or delivery options for your area.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="shop-location" aria-labelledby="location-title">
+        <div class="shop-container shop-location__inner">
+          <div>
+            <div class="shop-section-heading__accent" aria-hidden="true">
+              <span></span><span></span>
+            </div>
+            <p class="shop-eyebrow shop-eyebrow--dark">VISIT OR GET IN TOUCH</p>
+            <h2 id="location-title">Shop with Amata</h2>
+            <p>
+              Contact us to confirm product availability, pricing, collection and delivery options
+              before you travel or place an order.
+            </p>
+          </div>
+          <div class="shop-location__card">
+            <p class="shop-location__label">COLLECTION POINT</p>
+            <h3>Loy Plaza, Room L26</h3>
+            <p>Kampala, Uganda</p>
+            <a href="tel:+256759163839">+256 759 163 839</a>
+            <a href={whatsappLink('current stock, pricing and delivery options')} target="_blank" rel="noopener noreferrer">
+              Message us on WhatsApp
+            </a>
+            <p class="shop-location__hours">Monday to Saturday, 8am–6pm</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="shop-faq" aria-labelledby="shop-faq-title">
+        <div class="shop-container">
+          <div class="shop-section-heading">
+            <div class="shop-section-heading__accent" aria-hidden="true">
+              <span></span><span></span>
+            </div>
+            <p class="shop-eyebrow shop-eyebrow--dark">GOOD TO KNOW</p>
+            <h2 id="shop-faq-title">Shop FAQs</h2>
+          </div>
+          <div class="shop-faq__list">
+            <details>
+              <summary>How can I check prices and stock?</summary>
+              <p>Call or WhatsApp us with the product you need. We’ll confirm current availability and pricing.</p>
+            </details>
+            <details>
+              <summary>Can you deliver outside Kampala?</summary>
+              <p>Delivery options depend on your location and the order. Contact us to confirm availability and any delivery cost before ordering.</p>
+            </details>
+            <details>
+              <summary>Can you help me choose a pest-control product?</summary>
+              <p>Tell us the pest, where it is occurring and how you plan to use the product. We can discuss suitable options and label instructions.</p>
+            </details>
+            <details>
+              <summary>Can I collect my order?</summary>
+              <p>Ask us to confirm availability before visiting. Collection is from Loy Plaza, Room L26, Kampala.</p>
+            </details>
+          </div>
+          <p class="shop-services-link">
+            Looking for an on-site treatment instead?
+            <a href="/services/">Explore Amata’s pest control services across Uganda</a>.
+          </p>
+        </div>
+      </section>
+    </main>
+    <SiteFooter />
+  </div>
+</BaseLayout>
+
+<style>
+  .shop-page {
+    color: #0f172a;
+    background: #fff;
+    font-family: 'Public Sans', system-ui, sans-serif;
+    font-size: 16px;
+  }
+
+  .shop-page *,
+  .shop-page *::before,
+  .shop-page *::after {
+    box-sizing: border-box;
+  }
+
+  .shop-page h1,
+  .shop-page h2,
+  .shop-page h3 {
+    margin: 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  .shop-container,
+  .shop-hero__inner,
+  .shop-benefits__inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .shop-hero {
+    position: relative;
+    overflow: hidden;
+    color: #0a1b44;
+    background: #f7f5f2;
+  }
+
+  .shop-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(270px, 0.65fr);
+    align-items: center;
+    gap: clamp(40px, 8vw, 104px);
+    min-height: 490px;
+    padding-top: 76px;
+    padding-bottom: 84px;
+  }
+
+  .shop-hero__copy {
+    max-width: 700px;
+  }
+
+  .shop-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 18px;
+    color: #c8102e;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  .shop-eyebrow span {
+    width: 28px;
+    height: 3px;
+    background: #c8102e;
+  }
+
+  .shop-hero h1 {
+    max-width: 720px;
+    font-size: clamp(42px, 5.2vw, 64px);
+    line-height: 1.04;
+  }
+
+  .shop-hero__description {
+    max-width: 650px;
+    margin: 24px 0 30px;
+    color: #475569;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .shop-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .shop-button {
+    display: inline-flex;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 22px;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+
+  .shop-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .shop-button--red {
+    color: #fff;
+    background: #c8102e;
+  }
+
+  .shop-button--red:hover {
+    background: #a20d25;
+  }
+
+  .shop-button--outline {
+    border: 1px solid #0a1b44;
+    color: #0a1b44;
+  }
+
+  .shop-button--outline:hover {
+    border-color: #1d3fa8;
+    background: #e8eefc;
+  }
+
+  .shop-hero__note {
+    margin: 18px 0 0;
+    color: #64748b;
+    font-size: 13px;
+  }
+
+  .shop-hero__panel {
+    position: relative;
+    overflow: hidden;
+    padding: 34px 30px;
+    border: 1px solid #1d3fa8;
+    background: linear-gradient(145deg, #0a1b44, #102451);
+    box-shadow: 0 20px 42px rgb(10 27 68 / 14%);
+  }
+
+  .shop-hero__panel-mark {
+    position: absolute;
+    top: -56px;
+    right: -16px;
+    color: rgb(255 255 255 / 7%);
+    font-family: Georgia, serif;
+    font-size: 210px;
+    font-weight: 800;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .shop-hero__panel-label,
+  .shop-location__label {
+    position: relative;
+    margin: 0 0 16px;
+    color: #f0a8b2;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  .shop-hero__panel h2 {
+    position: relative;
+    max-width: 280px;
+    color: #fff;
+    font-size: 30px;
+    line-height: 1.12;
+  }
+
+  .shop-hero__panel > p:not(.shop-hero__panel-label) {
+    position: relative;
+    color: #d7def0;
+    line-height: 1.65;
+  }
+
+  .shop-hero__panel-rule {
+    height: 1px;
+    margin: 24px 0 18px;
+    background: rgb(255 255 255 / 20%);
+  }
+
+  .shop-hero__panel-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .shop-hero__panel-contact span {
+    color: #b7c5e1;
+    font-size: 13px;
+  }
+
+  .shop-hero__panel-contact a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .shop-hero__stripe,
+  .shop-section-heading__accent {
+    display: flex;
+    height: 5px;
+  }
+
+  .shop-hero__stripe span:first-child,
+  .shop-section-heading__accent span:first-child {
+    flex: 1;
+    background: #c8102e;
+  }
+
+  .shop-hero__stripe span:nth-child(2),
+  .shop-section-heading__accent span:nth-child(2) {
+    flex: 2;
+    background: #1d3fa8;
+  }
+
+  .shop-hero__stripe span:last-child {
+    flex: 1;
+    background: #c8102e;
+  }
+
+  .shop-benefits {
+    border-bottom: 1px solid #e8eaf0;
+    background: #fff;
+  }
+
+  .shop-benefits__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+
+  .shop-benefits__inner > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #0a1b44;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .shop-benefits__number {
+    color: #c8102e;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .shop-products,
+  .shop-faq {
+    padding: 82px 0 88px;
+    background: #f7f5f2;
+  }
+
+  .shop-section-heading {
+    max-width: 680px;
+    margin-bottom: 38px;
+  }
+
+  .shop-section-heading__accent {
+    width: 76px;
+    margin-bottom: 22px;
+  }
+
+  .shop-eyebrow--dark {
+    margin-bottom: 12px;
+    color: #1d3fa8;
+  }
+
+  .shop-section-heading h2,
+  .shop-location h2,
+  .shop-order h2 {
+    color: #0a1b44;
+    font-size: clamp(34px, 4vw, 46px);
+    line-height: 1.1;
+  }
+
+  .shop-section-heading > p:last-child,
+  .shop-location__inner > div:first-child > p:last-child {
+    max-width: 650px;
+    margin: 15px 0 0;
+    color: #475569;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .shop-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  .shop-product-card {
+    min-width: 0;
+    background: #fff;
+    box-shadow: 0 10px 28px rgb(10 27 68 / 6%);
+    transition: box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  .shop-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgb(10 27 68 / 12%);
+  }
+
+  .shop-product-card__visual {
+    position: relative;
+    display: grid;
+    margin: 0;
+    min-height: 205px;
+    place-items: center;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 55%, #fff 0 30%, transparent 31%),
+      #fdecef;
+  }
+
+  .shop-product-card--blue .shop-product-card__visual {
+    background:
+      radial-gradient(circle at 50% 55%, #fff 0 30%, transparent 31%),
+      #e8eefc;
+  }
+
+  .shop-product-card__visual::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: #c8102e;
+    content: '';
+  }
+
+  .shop-product-card--blue .shop-product-card__visual::after {
+    background: #1d3fa8;
+  }
+
+  .shop-product-card__visual svg {
+    width: 94px;
+    height: 94px;
+    stroke: #c8102e;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .shop-product-card--blue .shop-product-card__visual svg {
+    stroke: #1d3fa8;
+  }
+
+  .shop-product-card__badge {
+    position: absolute;
+    z-index: 1;
+    top: 14px;
+    left: 14px;
+    padding: 6px 9px;
+    background: #fff;
+    color: #0a1b44;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .shop-product-card__body {
+    display: flex;
+    min-height: 295px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px 20px 20px;
+  }
+
+  .shop-product-card__category {
+    margin: 0 0 8px;
+    color: #c8102e;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .shop-product-card h3 {
+    color: #0a1b44;
+    font-size: 22px;
+    line-height: 1.15;
+  }
+
+  .shop-product-card__description {
+    margin: 12px 0 16px;
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .shop-product-card__detail {
+    margin: auto 0 16px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .shop-product-card__link {
+    display: flex;
+    width: 100%;
+    min-height: 44px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 1px solid #e5e7eb;
+    color: #1d3fa8;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .shop-product-card__link:hover {
+    color: #c8102e;
+  }
+
+  .shop-product-card__link span {
+    font-size: 19px;
+  }
+
+  .shop-stock-note {
+    margin: 28px 0 0;
+    padding: 16px 18px;
+    border-left: 3px solid #c8102e;
+    background: #fff;
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .shop-stock-note strong {
+    color: #0a1b44;
+  }
+
+  .shop-source-note {
+    margin: 14px 0 0;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .shop-source-note a {
+    color: #1d3fa8;
+    font-weight: 700;
+    text-underline-offset: 2px;
+  }
+
+  .shop-order {
+    padding: 76px 0;
+    background: #fff;
+  }
+
+  .shop-order__inner {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+    gap: 60px;
+  }
+
+  .shop-order .shop-eyebrow {
+    color: #1d3fa8;
+  }
+
+  .shop-order__steps {
+    display: grid;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .shop-order__steps li {
+    display: flex;
+    gap: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .shop-order__steps li > span {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: none;
+    place-items: center;
+    background: #0a1b44;
+    color: #fff;
+    font-weight: 800;
+  }
+
+  .shop-order__steps h3 {
+    color: #0a1b44;
+    font-family: 'Public Sans', system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+
+  .shop-order__steps p {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .shop-location {
+    padding: 76px 0;
+    background: #f7f5f2;
+  }
+
+  .shop-location__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(270px, 0.85fr);
+    align-items: center;
+    gap: 72px;
+  }
+
+  .shop-location__card {
+    padding: 30px;
+    border-top: 4px solid #c8102e;
+    background: #fff;
+    box-shadow: 0 12px 32px rgb(10 27 68 / 7%);
+  }
+
+  .shop-location__label {
+    color: #1d3fa8;
+  }
+
+  .shop-location__card h3 {
+    color: #0a1b44;
+    font-size: 25px;
+  }
+
+  .shop-location__card > p:not(.shop-location__label, .shop-location__hours) {
+    margin: 8px 0 20px;
+    color: #64748b;
+  }
+
+  .shop-location__card > a {
+    display: block;
+    width: fit-content;
+    margin-top: 12px;
+    color: #1d3fa8;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .shop-location__card > a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .shop-location__hours {
+    margin: 20px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+    color: #64748b;
+    font-size: 13px;
+  }
+
+  .shop-faq {
+    background: #fff;
+  }
+
+  .shop-faq__list {
+    border-top: 1px solid #d5dbe6;
+  }
+
+  .shop-faq__list details {
+    margin: 0;
+    padding: 19px 2px;
+    border: 0;
+    border-bottom: 1px solid #d5dbe6;
+    background: transparent;
+  }
+
+  .shop-faq__list summary {
+    color: #0a1b44;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .shop-faq__list details p {
+    max-width: 760px;
+    margin: 12px 0 0;
+    color: #475569;
+    line-height: 1.7;
+  }
+
+  .shop-services-link {
+    margin: 30px 0 0;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .shop-services-link a {
+    color: #1d3fa8;
+    font-weight: 800;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 900px) {
+    .shop-product-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .shop-hero__inner {
+      grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+      gap: 34px;
+    }
+
+    .shop-order__inner,
+    .shop-location__inner {
+      gap: 38px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .shop-container,
+    .shop-hero__inner,
+    .shop-benefits__inner {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+
+    .shop-hero__inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 34px;
+      padding-top: 54px;
+      padding-bottom: 48px;
+    }
+
+    .shop-hero h1 {
+      font-size: clamp(38px, 10vw, 52px);
+    }
+
+    .shop-hero__description {
+      font-size: 16px;
+    }
+
+    .shop-hero__panel {
+      padding: 26px 24px;
+    }
+
+    .shop-benefits__inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 13px;
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    .shop-products,
+    .shop-order,
+    .shop-location,
+    .shop-faq {
+      padding-top: 58px;
+      padding-bottom: 60px;
+    }
+
+    .shop-section-heading {
+      margin-bottom: 28px;
+    }
+
+    .shop-product-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .shop-product-card {
+      display: grid;
+      grid-template-columns: minmax(105px, 0.36fr) minmax(0, 0.64fr);
+      align-items: stretch;
+    }
+
+    .shop-product-card__visual {
+      min-height: 100%;
+    }
+
+    .shop-product-card__visual svg {
+      width: 70px;
+      height: 70px;
+    }
+
+    .shop-product-card__badge {
+      top: 9px;
+      left: 8px;
+      padding: 5px 6px;
+      font-size: 8px;
+    }
+
+    .shop-product-card__body {
+      min-height: 0;
+      padding: 18px 16px 14px;
+    }
+
+    .shop-product-card h3 {
+      font-size: 19px;
+    }
+
+    .shop-product-card__description {
+      margin: 9px 0 12px;
+      font-size: 13px;
+    }
+
+    .shop-product-card__detail {
+      margin: 0 0 12px;
+      font-size: 11px;
+    }
+
+    .shop-product-card__link {
+      min-height: 38px;
+      font-size: 12px;
+    }
+
+    .shop-order__inner,
+    .shop-location__inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 28px;
+    }
+
+    .shop-location__card {
+      padding: 24px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .shop-product-card {
+      grid-template-columns: minmax(90px, 0.32fr) minmax(0, 0.68fr);
+    }
+
+    .shop-product-card__body {
+      padding-right: 12px;
+      padding-left: 12px;
+    }
+
+    .shop-product-card__description {
+      font-size: 12px;
+    }
+  }
+</style>

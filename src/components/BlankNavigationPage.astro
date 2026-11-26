@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from './ImagePlaceholder.astro';
 import SiteFooter from './SiteFooter.astro';
 import SiteHeader from './SiteHeader.astro';
 
@@ -11,7 +12,51 @@ const { title } = Astro.props;
     <SiteHeader />
     <main id="main-content" aria-label={title}>
       <span id="mobile-main-content"></span>
+      <section class="blank-page">
+        <div class="blank-page__inner">
+          <h1>{title}</h1>
+          <ImagePlaceholder
+            label={`${title} page`}
+            aspectRatio="16 / 7"
+            tone="blue"
+            className="image-slot--banner"
+          />
+        </div>
+      </section>
     </main>
     <SiteFooter />
   </div>
 </BaseLayout>
+
+<style>
+  .blank-page {
+    min-height: 55vh;
+    padding: 48px 0 64px;
+    background: #f7f5f2;
+  }
+
+  .blank-page__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .blank-page h1 {
+    margin: 0;
+    color: #0a1b44;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(36px, 5vw, 52px);
+    line-height: 1.1;
+  }
+
+  @media (max-width: 720px) {
+    .blank-page {
+      min-height: 48vh;
+      padding: 34px 0 48px;
+    }
+
+    .blank-page__inner {
+      padding: 0 18px;
+    }
+  }
+</style>

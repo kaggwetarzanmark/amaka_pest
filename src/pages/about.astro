@@ -1,34 +1,85 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import { designAboutMarkup } from '../data/designSource.js';
-import { mobileAboutMarkup } from '../data/mobileDesignSource.js';
+import ContentPage from '../components/ContentPage.astro';
+import EditorialHero from '../components/EditorialHero.astro';
+
+const pageTitle = 'About Amata Pests Control Heroes | Uganda';
+const pageDescription =
+  'Learn about Amata Pests Control Heroes (U) Ltd, its pest control and fumigation services, Kampala shop location and enquiry process for customers across Uganda.';
 ---
 
-<BaseLayout title="About Amata Pests Control Heroes">
-  <div class="desktop-design">
-    <div
-      class="design-page"
-      style="font-family:'Public Sans',system-ui,sans-serif;color:#0F172A;background:#fff;font-size:17px"
-    >
-      <SiteHeader mobile={false} />
-      <main id="main-content">
-        <div class="design-source-sections" set:html={designAboutMarkup}></div>
-      </main>
-      <SiteFooter />
+<ContentPage title={pageTitle} description={pageDescription}>
+  <EditorialHero
+    eyebrow="ABOUT AMATA"
+    title="Pest control support for homes and workplaces"
+    description="Amata Pests Control Heroes (U) Ltd provides pest-control and fumigation services, product enquiries and facility support. The team is based at Loy Plaza, Room L26, Kampala, and accepts service enquiries from across Uganda."
+    imageLabel="Amata team and service vehicle"
+  />
+
+  <section class="editorial-section" aria-labelledby="about-company-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="about-company-title">A practical, clear service process</h2>
+        <p>
+          Pest activity and property conditions vary. We begin by understanding what you have
+          noticed, where it is happening and what kind of property is affected. Where needed, the
+          next step is a site assessment before the treatment plan and price are confirmed.
+        </p>
+      </div>
+      <div class="editorial-grid">
+        <article class="editorial-card">
+          <h3>Discuss the problem</h3>
+          <p>Tell us the pest, signs you have seen, affected areas and your location.</p>
+        </article>
+        <article class="editorial-card">
+          <h3>Understand the proposal</h3>
+          <p>We discuss options, site preparation and relevant product or service instructions.</p>
+        </article>
+        <article class="editorial-card">
+          <h3>Approve the quote</h3>
+          <p>Review and agree the cost and scope before any work begins.</p>
+        </article>
+      </div>
     </div>
-  </div>
-  <div id="mobile-main-content" class="mobile-design">
-    <div
-      class="design-page"
-      style="font-family:'Public Sans',system-ui,sans-serif;color:#0F172A;background:#fff;font-size:16px"
-    >
-      <SiteHeader desktop={false} />
-      <main>
-        <div class="design-source-sections" set:html={mobileAboutMarkup}></div>
-      </main>
-      <SiteFooter />
+  </section>
+
+  <section class="editorial-section editorial-section--soft" aria-labelledby="about-services-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="about-services-title">Services and support</h2>
+        <p>
+          Enquiries include pest control and fumigation, rodent management, snake and lizard
+          concerns, pesticides and sprayers, washroom hygiene, and pest-prevention training.
+          Availability depends on service and location, so contact us to confirm.
+        </p>
+      </div>
+      <div class="editorial-grid">
+        <article class="editorial-card">
+          <h3>For homes and property managers</h3>
+          <p>Discuss pest activity, the property, access and relevant household considerations.</p>
+        </article>
+        <article class="editorial-card">
+          <h3>For hotels, schools and businesses</h3>
+          <p>Discuss service needs for guest areas, kitchens, offices and shared facilities.</p>
+        </article>
+        <article class="editorial-card">
+          <h3>For product enquiries</h3>
+          <p>Ask the shop about current stock, product labels, prices and collection or delivery options.</p>
+          <a href="/shop/">Visit the shop</a>
+        </article>
+      </div>
     </div>
-  </div>
-</BaseLayout>
+  </section>
+
+  <section class="editorial-section" aria-labelledby="about-contact-title">
+    <div class="editorial-section__inner editorial-callout">
+      <div>
+        <h2 id="about-contact-title">Speak with the Amata team</h2>
+        <p>
+          Loy Plaza, Room L26, Kampala · Monday to Saturday, 8am–6pm. Call to ask about your
+          location, the right service and the next step.
+        </p>
+      </div>
+      <a class="editorial-button" href="tel:+256759163839">Call +256 759 163 839</a>
+    </div>
+  </section>
+</ContentPage>

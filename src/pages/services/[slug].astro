@@ -1,0 +1,186 @@
+---
+import ContentPage from '../../components/ContentPage.astro';
+import EditorialHero from '../../components/EditorialHero.astro';
+import { services } from '../../data/services.js';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const publicSiteUrl = import.meta.env.PUBLIC_SITE_URL;
+const localBusinessId = publicSiteUrl ? `${publicSiteUrl}/#localbusiness` : '#localbusiness';
+const serviceUrl = publicSiteUrl
+  ? new URL(`/services/${service.slug}/`, publicSiteUrl).toString()
+  : undefined;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      '@id': serviceUrl ? `${serviceUrl}#service` : `#${service.slug}`,
+      name: service.name,
+      description: service.metaDescription,
+      serviceType: service.name,
+      provider: { '@id': localBusinessId },
+      areaServed: [
+        { '@type': 'Country', name: 'Uganda' },
+        { '@type': 'City', name: 'Kampala' },
+      ],
+      url: serviceUrl,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: publicSiteUrl },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Services',
+          item: publicSiteUrl ? `${publicSiteUrl}/services/` : undefined,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: service.name,
+          item: serviceUrl,
+        },
+      ],
+    },
+  ],
+};
+const whatsappMessage = encodeURIComponent(
+  `Hello Amata, I would like to ask about ${service.name}. My location is: `,
+);
+---
+
+<ContentPage
+  title={service.metaTitle}
+  description={service.metaDescription}
+  structuredData={structuredData}
+>
+  <nav class="editorial-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span aria-hidden="true">/</span>
+    <a href="/services/">Services</a><span aria-hidden="true">/</span>
+    <span aria-current="page">{service.name}</span>
+  </nav>
+
+  <EditorialHero
+    eyebrow="AMATA SERVICE"
+    title={service.name}
+    description={service.heroIntro}
+    imageLabel={service.imageLabel}
+  />
+
+  <section class="editorial-section" aria-labelledby="service-overview-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="service-overview-title">How this service works</h2>
+      </div>
+      <div class="editorial-copy">
+        <p>{service.overview}</p>
+        <p>
+          Service availability depends on your location and the details of the request. Contact
+          Amata to confirm coverage, timing, preparation requirements and price before booking.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="editorial-section editorial-section--soft" aria-labelledby="service-concerns-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="service-concerns-title">
+          {service.slug === 'pesticides-and-sprayers'
+            ? 'Products and enquiries'
+            : service.slug === 'sanitary-bin-hygiene'
+              ? 'Workplaces that can enquire'
+              : service.slug === 'staff-training'
+                ? 'Topics teams can discuss'
+                : 'Common reasons to contact us'}
+        </h2>
+      </div>
+      <ul class="editorial-list">
+        {service.concerns.map((concern) => <li>{concern}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="editorial-section" aria-labelledby="service-steps-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="service-steps-title">What to expect</h2>
+        <p>We explain the proposed work and any relevant instructions before you approve a service.</p>
+      </div>
+      <ol class="editorial-steps">
+        {service.process.map((step, index) => (
+          <li>
+            <span class="editorial-steps__number">{index + 1}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      {service.slug === 'pesticides-and-sprayers' && (
+        <p class="editorial-provenance" style="margin-top:24px">
+          The World Health Organization advises following manufacturers’ directions for application
+          and personal safety when using pesticides. Read its
+          <a
+            href="https://www.who.int/news-room/questions-and-answers/item/chemical-safety-pesticides"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Chemical safety: Pesticides guidance</a>, as well as the label for the specific product.
+        </p>
+      )}
+    </div>
+  </section>
+
+  <section class="editorial-section editorial-section--soft" aria-labelledby="service-faq-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="service-faq-title">Questions about {service.name.toLowerCase()}</h2>
+      </div>
+      <div class="editorial-faq">
+        {service.faqs.map((faq) => (
+          <details>
+            <summary>{faq.question}</summary>
+            <p>{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+      <p class="editorial-provenance" style="margin-top:24px">
+        Service information is provided by Amata Pests Control Heroes (U) Ltd. Confirm current
+        availability, service scope and any preparation instructions directly before booking.
+      </p>
+    </div>
+  </section>
+
+  <section class="editorial-section" aria-labelledby="service-contact-title">
+    <div class="editorial-section__inner editorial-callout">
+      <div>
+        <h2 id="service-contact-title">Ask about {service.name.toLowerCase()}</h2>
+        <p>Share your district or town and a short description of what you need.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a class="editorial-button" href="tel:+256759163839">Call +256 759 163 839</a>
+        <a
+          class="editorial-button"
+          href={`https://wa.me/256759163839?text=${whatsappMessage}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >WhatsApp</a>
+      </div>
+    </div>
+    <div class="editorial-section__inner" style="margin-top:24px">
+      <a href="/services/" style="color:#1D3FA8;font-weight:800">See all Amata services</a>
+      {service.slug === 'pesticides-and-sprayers' && (
+        <span> · <a href="/shop/" style="color:#1D3FA8;font-weight:800">Browse shop products</a></span>
+      )}
+    </div>
+  </section>
+</ContentPage>

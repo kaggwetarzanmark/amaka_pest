@@ -1,0 +1,92 @@
+---
+const { label, aspectRatio = '4 / 3', tone = 'red', className = '' } = Astro.props;
+---
+
+<div
+  class:list={['image-slot', `image-slot--${tone}`, className]}
+  style={`aspect-ratio: ${aspectRatio}`}
+  role="img"
+  aria-label={`${label} image placeholder`}
+  data-image-slot={label}
+>
+  <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+    <rect x="5" y="7" width="38" height="34" rx="1" />
+    <circle cx="32" cy="18" r="3" />
+    <path d="m8 35 11-11 8 8 5-5 8 8" />
+    <path d="M24 13v10m-5-5h10" />
+  </svg>
+  <span>{label}</span>
+  <small>Image to be added</small>
+</div>
+
+<style is:global>
+  .image-slot {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    overflow: hidden;
+    border: 1px dashed #aab6cb;
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 55%) 25%, transparent 25%) 0 0 / 18px 18px,
+      #eef1f7;
+    color: #0a1b44;
+    text-align: center;
+  }
+
+  .image-slot--banner {
+    width: min(1120px, calc(100% - 64px));
+    margin: 28px auto;
+  }
+
+  .image-slot--blue {
+    border-color: #9caddb;
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 60%) 25%, transparent 25%) 0 0 / 18px 18px,
+      #e8eefc;
+  }
+
+  .image-slot--red {
+    border-color: #e0a3ae;
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 60%) 25%, transparent 25%) 0 0 / 18px 18px,
+      #fdecef;
+  }
+
+  .image-slot svg {
+    width: 46px;
+    height: 46px;
+    stroke: #1d3fa8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+  }
+
+  .image-slot--red svg {
+    stroke: #c8102e;
+  }
+
+  .image-slot span {
+    max-width: 90%;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .image-slot small {
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 720px) {
+    .image-slot--banner {
+      width: calc(100% - 36px);
+      margin: 18px auto;
+    }
+  }
+</style>

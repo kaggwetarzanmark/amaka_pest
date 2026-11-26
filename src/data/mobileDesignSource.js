@@ -1,4 +1,6 @@
 import mobileSource from './mobile-design-source.html?raw';
+import { services } from './services.js';
+import { linkServiceHeadings } from './serviceLinks.js';
 import { siteBrandMarkup } from './siteBrandMarkup.js';
 import { siteFooterMarkup } from './siteFooterMarkup.js';
 import { applyWebsiteCopy } from './websiteCopy.js';
@@ -12,9 +14,18 @@ if (rootStart < 0 || rootEnd < rootStart) {
   throw new Error('Could not extract the original mobile design.');
 }
 
-let mobileDesignMarkup = applyWebsiteCopy(
+let mobileDesignMarkup = linkServiceHeadings(applyWebsiteCopy(
   mobileSource.slice(rootStart, rootEnd + '</div>'.length),
-);
+));
+mobileDesignMarkup = mobileDesignMarkup
+  .replaceAll(
+    'alt="Amata technician team"',
+    'alt="Amata technician team" data-image-slot="team-photo"',
+  )
+  .replaceAll(
+    'alt="Amata technician with sprayer"',
+    'alt="Amata technician with sprayer" data-image-slot="technician-in-action"',
+  );
 
 const mobileBrandPattern =
   /<div style="display:flex;align-items:center;gap:12px"><img [^>]+><div><b class="hd"[^>]*>Amata<\/b><span[^>]*>Pest control<\/span><\/div><\/div>/;
@@ -66,8 +77,10 @@ mobileDesignMarkup = mobileDesignMarkup.replace(
   '<button class="mobile-menu-toggle" type="button" aria-label="Open menu" aria-controls="mobile-site-nav" aria-expanded="false" style="width:48px;height:48px;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;padding:0;border:0;background:transparent;cursor:pointer"><i aria-hidden="true" style="width:26px;height:3px;background:#0A1B44"></i><i aria-hidden="true" style="width:26px;height:3px;background:#C8102E"></i><i aria-hidden="true" style="width:26px;height:3px;background:#1D3FA8"></i></button>',
 );
 
-const mobileMenu =
-  '<nav id="mobile-site-nav" class="mobile-menu-panel" aria-label="Main navigation" hidden><a href="/services/">Services</a><a href="/shop/">Shop</a><a href="/training/">Training</a><a href="/about/">About</a><a href="/faq/">FAQ</a></nav>';
+const mobileServiceLinks = services
+  .map((service) => `<a href="/services/${service.slug}/">${service.name}</a>`)
+  .join('');
+const mobileMenu = `<nav id="mobile-site-nav" class="mobile-menu-panel" aria-label="Main navigation" hidden><details class="mobile-services-dropdown"><summary>Services</summary><div class="mobile-services-dropdown__links"><a href="/services/">All services</a>${mobileServiceLinks}</div></details><a href="/shop/">Shop</a><a href="/training/">Training</a><a href="/about/">About</a><a href="/faq/">FAQ</a></nav>`;
 
 if (!mobileDesignMarkup.includes('</header>')) {
   throw new Error('Could not insert the mobile navigation links.');

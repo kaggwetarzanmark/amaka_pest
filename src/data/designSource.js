@@ -1,4 +1,6 @@
 import designSource from './design-source.html?raw';
+import { services } from './services.js';
+import { linkServiceHeadings } from './serviceLinks.js';
 import { siteBrandMarkup } from './siteBrandMarkup.js';
 import { applyWebsiteCopy } from './websiteCopy.js';
 
@@ -14,10 +16,19 @@ if (bodyStart < '<body>'.length || bodyEnd < 0 || rootStart < 0 || rootEnd < con
   throw new Error('Could not extract the original design body.');
 }
 
-const content = applyWebsiteCopy(designSource.slice(contentStart, rootEnd)).replaceAll(
-  'src="./assets/7fdcbba15a0a7e03b0d18bf61b77b310.jpg"',
-  'src="/assets/7fdcbba15a0a7e03b0d18bf61b77b310.jpg"',
-);
+const content = linkServiceHeadings(applyWebsiteCopy(designSource.slice(contentStart, rootEnd)))
+  .replaceAll(
+    'src="./assets/7fdcbba15a0a7e03b0d18bf61b77b310.jpg"',
+    'src="/assets/7fdcbba15a0a7e03b0d18bf61b77b310.jpg"',
+  )
+  .replaceAll(
+    'alt="Amata technician team"',
+    'alt="Amata technician team" data-image-slot="team-photo"',
+  )
+  .replaceAll(
+    'alt="Amata technician with sprayer"',
+    'alt="Amata technician with sprayer" data-image-slot="technician-in-action"',
+  );
 const headerStart = content.indexOf('<div style="display:flex;font-size:15px;color:#fff">');
 const navEnd = content.indexOf('</nav>', headerStart) + '</nav>'.length;
 const footerStart = content.lastIndexOf('<footer style="background:#06122F;');
@@ -73,6 +84,20 @@ for (const [, slug] of pageLinks) {
     `href="/${slug}/"`,
   );
 }
+
+const servicesNavLink = '<a class="l" href="/services/">Services</a>';
+const servicesDropdown = `<details class="services-dropdown"><summary class="l">Services</summary><div class="services-dropdown__menu"><a class="services-dropdown__link services-dropdown__link--overview" href="/services/">All services <span>Overview</span></a>${services
+  .map(
+    (service) =>
+      `<a class="services-dropdown__link" href="/services/${service.slug}/">${service.name}</a>`,
+  )
+  .join('')}</div></details>`;
+
+if (!headerMarkup.includes(servicesNavLink)) {
+  throw new Error('Could not add the services dropdown to desktop navigation.');
+}
+
+headerMarkup = headerMarkup.replace(servicesNavLink, servicesDropdown);
 
 sectionsMarkup = sectionsMarkup.replaceAll('href="#shop"', 'href="/shop/"');
 

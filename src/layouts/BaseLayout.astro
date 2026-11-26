@@ -95,6 +95,8 @@ const organizationSchema = {
         'Fumigation',
         'Rodent control',
         'Snake and lizard control',
+        'Pesticides and sprayers',
+        'Sanitary bin and washroom hygiene',
         'Pest prevention training',
       ],
     },
@@ -138,6 +140,7 @@ const organizationSchema = {
     },
   ],
 };
+const jsonLdData = Astro.props.structuredData ?? (isHomePage ? organizationSchema : undefined);
 ---
 
 <!doctype html>
@@ -171,8 +174,11 @@ const organizationSchema = {
       rel="stylesheet"
     />
     <title>{title}</title>
-    {isHomePage && (
-      <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    {jsonLdData && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(jsonLdData).replaceAll('<', '\\u003c')}
+      />
     )}
   </head>
   <body class={Astro.url.pathname === '/' ? 'home-page' : undefined}>
@@ -209,7 +215,21 @@ const organizationSchema = {
         });
 
         document.addEventListener('keydown', (event) => {
-          if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+          if (event.key !== 'Escape') {
+            return;
+          }
+
+          const openDropdown = document.querySelector(
+            '.services-dropdown[open], .mobile-services-dropdown[open]',
+          );
+
+          if (openDropdown instanceof HTMLDetailsElement) {
+            openDropdown.open = false;
+            openDropdown.querySelector('summary')?.focus();
+            return;
+          }
+
+          if (menuButton.getAttribute('aria-expanded') === 'true') {
             closeMenu();
             menuButton.focus();
           }
@@ -222,6 +242,12 @@ const organizationSchema = {
             !menuButton.contains(event.target)
           ) {
             closeMenu();
+          }
+
+          const desktopDropdown = document.querySelector('.services-dropdown[open]');
+
+          if (desktopDropdown && event.target instanceof Node && !desktopDropdown.contains(event.target)) {
+            desktopDropdown.removeAttribute('open');
           }
         });
       }

@@ -1,5 +1,112 @@
 ---
-import BlankNavigationPage from '../components/BlankNavigationPage.astro';
+import ContentPage from '../components/ContentPage.astro';
+import EditorialHero from '../components/EditorialHero.astro';
+
+const pageTitle = 'Pest Prevention Training for Teams in Uganda | Amata';
+const pageDescription =
+  'Ask Amata about practical pest-prevention and hygiene training for hotel, restaurant, school and facility teams in Uganda. Discuss topics and session availability.';
 ---
 
-<BlankNavigationPage title="Training" />
+<ContentPage title={pageTitle} description={pageDescription}>
+  <EditorialHero
+    eyebrow="TEAM TRAINING"
+    title="Help your team spot pest risks earlier"
+    description="Discuss practical pest-prevention and hygiene training for hotels, restaurants, schools and facility teams. We’ll confirm suitable topics, format, availability and cost with you."
+    imageLabel="Amata delivering pest prevention training"
+  />
+
+  <section class="editorial-section" aria-labelledby="training-intro-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="training-intro-title">Training shaped around your workplace</h2>
+        <p>
+          Staff are often the first to notice pest activity. A clear way to recognise, record and
+          report signs helps a facility respond consistently. Contact Amata to discuss a session
+          that reflects your site, staff roles and existing procedures.
+        </p>
+      </div>
+      <div class="editorial-grid">
+        <article class="editorial-card">
+          <h3>Hotels and guest facilities</h3>
+          <p>Discuss observation and reporting routines across guest rooms, kitchens and shared spaces.</p>
+        </article>
+        <article class="editorial-card">
+          <h3>Restaurants and food-service teams</h3>
+          <p>Discuss housekeeping, storage and reporting practices relevant to your work areas.</p>
+        </article>
+        <article class="editorial-card">
+          <h3>Schools and facility teams</h3>
+          <p>Discuss practical prevention routines for staff responsible for buildings and shared areas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="editorial-section editorial-section--soft" aria-labelledby="training-topics-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="training-topics-title">Topics to discuss with our team</h2>
+        <p>Confirm the session content with us before booking so it matches your team’s needs.</p>
+      </div>
+      <ul class="editorial-list">
+        <li>Recognising and reporting signs of pest activity.</li>
+        <li>Housekeeping and hygiene routines for kitchens, stores and shared spaces.</li>
+        <li>Food and waste storage practices relevant to your facility.</li>
+        <li>Safe storage and label awareness for pest-control products.</li>
+        <li>Who to notify and what details to record when activity is found.</li>
+      </ul>
+      <p class="editorial-provenance" style="margin-top:24px">
+        Training is discussed for your workplace and team. Ask directly about session length,
+        materials, delivery format, costs and whether any certificate or accreditation is included.
+        For independent pesticide-handling information, review the World Health Organization’s
+        <a
+          href="https://www.who.int/news-room/questions-and-answers/item/chemical-safety-pesticides"
+          target="_blank"
+          rel="noopener noreferrer"
+        >pesticide-safety guidance</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="editorial-section" aria-labelledby="training-booking-title">
+    <div class="editorial-section__inner">
+      <div class="editorial-section__heading">
+        <h2 id="training-booking-title">Arrange a training enquiry</h2>
+        <p>Share these details so we can respond with relevant options.</p>
+      </div>
+      <ol class="editorial-steps">
+        <li>
+          <span class="editorial-steps__number">1</span>
+          <div>
+            <h3>Tell us about your facility</h3>
+            <p>Include your location, facility type, team size and the areas staff work in.</p>
+          </div>
+        </li>
+        <li>
+          <span class="editorial-steps__number">2</span>
+          <div>
+            <h3>Identify the training need</h3>
+            <p>Share the pest concerns or prevention routines you want the session to address.</p>
+          </div>
+        </li>
+        <li>
+          <span class="editorial-steps__number">3</span>
+          <div>
+            <h3>Confirm the plan and quote</h3>
+            <p>Agree the session content, arrangements, availability and price before booking.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="editorial-section editorial-section--soft">
+    <div class="editorial-section__inner editorial-callout">
+      <div>
+        <h2>Ask about staff training</h2>
+        <p>Call with your facility type, location and team requirements.</p>
+      </div>
+      <a class="editorial-button" href="tel:+256759163839">Call +256 759 163 839</a>
+    </div>
+  </section>
+</ContentPage>
