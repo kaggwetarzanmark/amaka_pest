@@ -79,7 +79,16 @@ const shopDescription =
             <p class="shop-hero__note">Prices and stock confirmed directly by our team.</p>
           </div>
           <div class="shop-hero__panel" aria-label="Shop information">
-            <div class="shop-hero__panel-mark" aria-hidden="true">A</div>
+            <img
+              class="shop-hero__image"
+              src="/assets/Upscale_image_7363fbcd.jpg"
+              alt="Technician wearing protective clothing and using a backpack sprayer indoors."
+              width="1344"
+              height="756"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
             <p class="shop-hero__panel-label">SHOP WITH AMATA</p>
             <h2>Get the right product for the job.</h2>
             <p>Share the pest, location and intended use. We’ll help you check suitable options.</p>
@@ -378,16 +387,13 @@ const shopDescription =
     box-shadow: 0 20px 42px rgb(10 27 68 / 14%);
   }
 
-  .shop-hero__panel-mark {
-    position: absolute;
-    top: -56px;
-    right: -16px;
-    color: rgb(255 255 255 / 7%);
-    font-family: Georgia, serif;
-    font-size: 210px;
-    font-weight: 800;
-    line-height: 1;
-    pointer-events: none;
+  .shop-hero__image {
+    display: block;
+    width: calc(100% + 60px);
+    max-width: none;
+    height: 170px;
+    margin: -34px -30px 24px;
+    object-fit: cover;
   }
 
   .shop-hero__panel-label,
@@ -886,6 +892,11 @@ const shopDescription =
 
     .shop-hero__panel {
       padding: 26px 24px;
+    }
+
+    .shop-hero__image {
+      width: calc(100% + 48px);
+      margin: -26px -24px 22px;
     }
 
     .shop-benefits__inner {

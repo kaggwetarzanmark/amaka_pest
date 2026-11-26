@@ -10,6 +10,8 @@ export const services = [
     heroIntro:
       'Pest problems need a plan that fits the pest and the property. Tell us what you have seen and where; we will discuss an assessment, suitable options and a quote before work begins.',
     imageLabel: 'Pest inspection or treatment in progress',
+    imageSrc: '/assets/Upscale_image_with_camera_339ece03.jpg',
+    imageAlt: 'Pest-control technician in protective clothing using a sprayer outside a building.',
     overview:
       'Amata provides pest control and fumigation for residential and commercial properties. The pest, level of activity, layout and people using the space all affect which treatment options are appropriate. We discuss the issue first, assess the site where available, and explain the proposed work and preparation before treatment.',
     concerns: [
@@ -64,6 +66,8 @@ export const services = [
     heroIntro:
       'Droppings, gnaw marks or repeated sightings can signal rodent activity. Share where the signs appear and how the space is used so we can discuss an appropriate assessment.',
     imageLabel: 'Rodent inspection or control equipment',
+    imageSrc: '/assets/Upscale_image_efac44d4.jpg',
+    imageAlt: 'Pest-control technician in protective equipment inspecting an indoor area with a light.',
     overview:
       'Rodent control is more effective when the activity and contributing site conditions are understood. Amata discusses visible signs, likely access points and the property use before recommending control options. The proposed approach and quote are reviewed with you before work begins.',
     concerns: [
@@ -117,7 +121,9 @@ export const services = [
       'Contact Amata about snake or lizard sightings at homes and businesses in Uganda. Keep away from the animal and confirm local service availability.',
     heroIntro:
       'If you see a snake, keep a safe distance and keep other people and pets away. Contact us with your location and the animal’s last known position so we can discuss next steps.',
-    imageLabel: 'Technician assessing a property exterior',
+    imageLabel: 'Technician carrying out pest-control work at a property',
+    imageSrc: '/assets/Upscale_image_with_camera_339ece03.jpg',
+    imageAlt: 'Pest-control technician wearing protective clothing and using a sprayer outside a building.',
     overview:
       'Snake and lizard enquiries depend on the animal, its location and whether it is still visible. Do not try to catch, corner or handle it. Keep people away from the area and call to confirm whether assistance is available for your location.',
     concerns: [
@@ -171,6 +177,8 @@ export const services = [
     heroIntro:
       'Product availability and prices change. Contact the shop with the pest and intended use so you can confirm current options and read the product label before purchase.',
     imageLabel: 'Pesticide products and sprayer equipment',
+    imageSrc: '/assets/Upscale_image_7363fbcd.jpg',
+    imageAlt: 'Pest-control technician wearing protective clothing and using a backpack sprayer in a workspace.',
     overview:
       'Amata’s shop handles enquiries about pesticides, hand and backpack sprayers, protective gear and rodent-control products. Ask about current stock, pack sizes and prices before visiting. Product choice should follow the label and the intended site; if you are unsure, ask before buying.',
     concerns: [
@@ -225,6 +233,8 @@ export const services = [
     heroIntro:
       'Workplace washrooms need a consistent, discreet hygiene plan. Tell us about your facility and requirements so we can discuss service scope and availability.',
     imageLabel: 'Clean workplace washroom',
+    imageSrc: '/assets/Upscale_image_7363fbcd.jpg',
+    imageAlt: 'Pest-control technician in protective clothing working inside a facility.',
     overview:
       'Amata offers sanitary-bin and washroom hygiene enquiries for offices, hotels and other workplaces. The right service arrangement depends on the facility, number of washrooms and requested schedule. Contact us to discuss scope, collection arrangements and a quote.',
     concerns: [
@@ -273,6 +283,8 @@ export const services = [
     heroIntro:
       'Help staff notice pest activity early and follow consistent prevention routines. Contact us to discuss a training session suited to your facility and team.',
     imageLabel: 'Pest prevention training for a facility team',
+    imageSrc: '/assets/upscale_this_image_0521ba99.jpg',
+    imageAlt: 'Pest-control technician carrying a backpack sprayer into a workplace.',
     overview:
       'Amata provides pest-prevention and hygiene training enquiries for hotel, restaurant, school and facility teams. The training can be discussed around the site’s work areas, routine practices and reporting needs. Contact us to confirm the proposed topics, format and availability.',
     concerns: [

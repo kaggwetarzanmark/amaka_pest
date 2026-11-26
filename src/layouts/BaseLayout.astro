@@ -187,8 +187,6 @@ const jsonLdData = Astro.props.structuredData ?? (isHomePage ? organizationSchem
     <slot />
     <FloatingWhatsApp />
     <script>
-      import { animate, inView } from 'motion';
-
       const revealTargets = document.querySelectorAll(
         '.design-source-sections > section, .mobile-design section',
       );
@@ -252,25 +250,26 @@ const jsonLdData = Astro.props.structuredData ?? (isHomePage ? organizationSchem
         });
       }
 
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const revealedSections = new WeakSet<Element>();
+      if (
+        revealTargets.length > 0 &&
+        'IntersectionObserver' in window &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('motion-revealed');
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.08, rootMargin: '0px 0px -24px 0px' },
+        );
 
         for (const target of revealTargets) {
           target.classList.add('motion-reveal');
-          inView(
-            target,
-            (element) => {
-              if (!revealedSections.has(element)) {
-                revealedSections.add(element);
-                animate(
-                  element,
-                  { opacity: [0, 1], y: [12, 0] },
-                  { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
-                );
-              }
-            },
-            { amount: 0.08, margin: '0px 0px -24px 0px' },
-          );
+          revealObserver.observe(target);
         }
       }
     </script>

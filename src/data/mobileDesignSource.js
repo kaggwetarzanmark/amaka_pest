@@ -19,12 +19,20 @@ let mobileDesignMarkup = linkServiceHeadings(applyWebsiteCopy(
 ));
 mobileDesignMarkup = mobileDesignMarkup
   .replaceAll(
+    'src="./assets/f4de0ffd6b120f6b03c8878e12f27828.jpg"',
+    'src="/assets/Upscale_image_7363fbcd.jpg"',
+  )
+  .replaceAll(
     'alt="Amata technician team"',
-    'alt="Amata technician team" data-image-slot="team-photo"',
+    'alt="Amata technician team" fetchpriority="high" decoding="async" data-image-slot="team-photo"',
   )
   .replaceAll(
     'alt="Amata technician with sprayer"',
-    'alt="Amata technician with sprayer" data-image-slot="technician-in-action"',
+    'alt="Amata technician wearing protective clothing and using a backpack sprayer indoors" loading="lazy" decoding="async" data-image-slot="technician-in-action"',
+  )
+  .replaceAll(
+    'alt="Amata emblem"',
+    'alt="Amata emblem" loading="lazy" decoding="async"',
   );
 
 const mobileBrandPattern =

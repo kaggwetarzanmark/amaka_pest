@@ -1,7 +1,7 @@
 ---
 import ImagePlaceholder from './ImagePlaceholder.astro';
 
-const { eyebrow, title, description, imageLabel } = Astro.props;
+const { eyebrow, title, description, imageLabel, imageSrc, imageAlt } = Astro.props;
 ---
 
 <section class="editorial-hero" aria-labelledby="editorial-hero-title">
@@ -20,7 +20,20 @@ const { eyebrow, title, description, imageLabel } = Astro.props;
         >Ask on WhatsApp</a>
       </div>
     </div>
-    <ImagePlaceholder label={imageLabel} aspectRatio="4 / 3" tone="blue" />
+    {imageSrc ? (
+      <img
+        class="editorial-hero__image"
+        src={imageSrc}
+        alt={imageAlt ?? imageLabel}
+        width="1344"
+        height="756"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    ) : (
+      <ImagePlaceholder label={imageLabel} aspectRatio="16 / 10" tone="blue" />
+    )}
   </div>
   <div class="editorial-hero__stripe" aria-hidden="true"><span></span><span></span><span></span></div>
 </section>
@@ -107,10 +120,17 @@ const { eyebrow, title, description, imageLabel } = Astro.props;
     text-underline-offset: 3px;
   }
 
-  .editorial-hero__inner > .image-slot {
+  .editorial-hero__inner > .image-slot,
+  .editorial-hero__image {
     width: calc(100% - 24px);
     margin: 12px;
     box-shadow: 12px 12px 0 #c8102e, -12px -12px 0 #1d3fa8;
+  }
+
+  .editorial-hero__image {
+    aspect-ratio: 16 / 10;
+    height: auto;
+    object-fit: cover;
   }
 
   .editorial-hero__stripe {
@@ -141,7 +161,8 @@ const { eyebrow, title, description, imageLabel } = Astro.props;
       font-size: clamp(36px, 9vw, 48px);
     }
 
-    .editorial-hero__inner > .image-slot {
+    .editorial-hero__inner > .image-slot,
+    .editorial-hero__image {
       box-shadow: 8px 8px 0 #c8102e, -8px -8px 0 #1d3fa8;
     }
   }

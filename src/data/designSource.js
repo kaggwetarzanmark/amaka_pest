@@ -22,12 +22,20 @@ const content = linkServiceHeadings(applyWebsiteCopy(designSource.slice(contentS
     'src="/assets/7fdcbba15a0a7e03b0d18bf61b77b310.jpg"',
   )
   .replaceAll(
+    'src="./assets/f4de0ffd6b120f6b03c8878e12f27828.jpg"',
+    'src="/assets/Upscale_image_7363fbcd.jpg"',
+  )
+  .replaceAll(
     'alt="Amata technician team"',
-    'alt="Amata technician team" data-image-slot="team-photo"',
+    'alt="Amata technician team" fetchpriority="high" decoding="async" data-image-slot="team-photo"',
   )
   .replaceAll(
     'alt="Amata technician with sprayer"',
-    'alt="Amata technician with sprayer" data-image-slot="technician-in-action"',
+    'alt="Amata technician wearing protective clothing and using a backpack sprayer indoors" loading="lazy" decoding="async" data-image-slot="technician-in-action"',
+  )
+  .replaceAll(
+    'alt="Amata emblem"',
+    'alt="Amata emblem" loading="lazy" decoding="async"',
   );
 const headerStart = content.indexOf('<div style="display:flex;font-size:15px;color:#fff">');
 const navEnd = content.indexOf('</nav>', headerStart) + '</nav>'.length;
