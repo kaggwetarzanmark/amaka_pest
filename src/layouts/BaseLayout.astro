@@ -6,8 +6,8 @@ import '../styles/animations.css';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 
 const {
-  title = 'Pest Control & Fumigation Across Uganda | Amata Pests Control Heroes',
-  description = 'Nationwide pest control and fumigation for homes, hotels and businesses across Uganda. Cockroaches, bed bugs, termites, rodents and snakes. Clear quotes before work starts.',
+  title = 'Pest Control and Fumigation Services in Uganda | Amata',
+  description = 'Need pest control or fumigation in Uganda? Ask Amata about termite, rodent, mosquito and bed bug services. Kampala-based; request a quote.',
 } = Astro.props;
 
 const publicSiteUrl = import.meta.env.PUBLIC_SITE_URL;
@@ -86,18 +86,22 @@ const organizationSchema = {
     {
       '@type': 'Service',
       '@id': publicSiteUrl ? `${publicSiteUrl}/#service` : '#service',
-      name: 'Pest Control and Fumigation in Uganda',
-      description: 'Pest inspection, fumigation, rodent control and pest prevention for homes, hotels, schools, hospitals and businesses across Uganda.',
+      name: 'Pest Control and Facility Services in Uganda',
+      description: 'General fumigation, rodent management, mosquito control, snake and reptile control, cockroach control, termite and bed bug treatment, crawling and flying insect control, manhole and sewer treatment, sanitary feminine hygiene, and pest consultancy and training.',
       provider: { '@id': publicSiteUrl ? `${publicSiteUrl}/#localbusiness` : '#localbusiness' },
       areaServed: { '@type': 'Country', name: 'Uganda' },
       serviceType: [
-        'Pest control',
-        'Fumigation',
-        'Rodent control',
-        'Snake and lizard control',
-        'Pesticides and sprayers',
-        'Sanitary bin and washroom hygiene',
-        'Pest prevention training',
+        'General fumigation',
+        'Rodent management',
+        'Mosquito control',
+        'Snake and reptiles control',
+        'Cockroach control',
+        'Pre- and post-construction termite treatment',
+        'Bed bug (Cimex) treatment',
+        'Crawling and flying insect control',
+        'Manhole and sewer treatment',
+        'Sanitary feminine hygiene',
+        'Consultancy and training for hotel staff',
       ],
     },
     {

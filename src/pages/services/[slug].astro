@@ -75,6 +75,7 @@ const whatsappMessage = encodeURIComponent(
     imageLabel={service.imageLabel}
     imageSrc={service.imageSrc}
     imageAlt={service.imageAlt}
+    imageFit={service.imageFit}
   />
 
   <section class="editorial-section" aria-labelledby="service-overview-title">
@@ -96,13 +97,11 @@ const whatsappMessage = encodeURIComponent(
     <div class="editorial-section__inner">
       <div class="editorial-section__heading">
         <h2 id="service-concerns-title">
-          {service.slug === 'pesticides-and-sprayers'
-            ? 'Products and enquiries'
-            : service.slug === 'sanitary-bin-hygiene'
-              ? 'Workplaces that can enquire'
-              : service.slug === 'staff-training'
-                ? 'Topics teams can discuss'
-                : 'Common reasons to contact us'}
+          {service.slug === 'sanitary-bin-hygiene'
+            ? 'Workplaces that can enquire'
+            : service.slug === 'staff-training'
+              ? 'Topics teams can discuss'
+              : 'Common reasons to contact us'}
         </h2>
       </div>
       <ul class="editorial-list">
@@ -128,17 +127,6 @@ const whatsappMessage = encodeURIComponent(
           </li>
         ))}
       </ol>
-      {service.slug === 'pesticides-and-sprayers' && (
-        <p class="editorial-provenance" style="margin-top:24px">
-          The World Health Organization advises following manufacturers’ directions for application
-          and personal safety when using pesticides. Read its
-          <a
-            href="https://www.who.int/news-room/questions-and-answers/item/chemical-safety-pesticides"
-            target="_blank"
-            rel="noopener noreferrer"
-          >Chemical safety: Pesticides guidance</a>, as well as the label for the specific product.
-        </p>
-      )}
     </div>
   </section>
 
@@ -156,8 +144,10 @@ const whatsappMessage = encodeURIComponent(
         ))}
       </div>
       <p class="editorial-provenance" style="margin-top:24px">
-        Service information is provided by Amata Pests Control Heroes (U) Ltd. Confirm current
-        availability, service scope and any preparation instructions directly before booking.
+        Service information is provided by Amata Pests Control Heroes (U) Ltd, based at Loy Plaza,
+        Room L26, Kampala. The listed services reflect the company's published offerings. Confirm
+        availability for your location, service scope, preparation instructions and price directly
+        before booking. <a href="/about/">About Amata</a>
       </p>
     </div>
   </section>
@@ -180,9 +170,6 @@ const whatsappMessage = encodeURIComponent(
     </div>
     <div class="editorial-section__inner" style="margin-top:24px">
       <a href="/services/" style="color:#1D3FA8;font-weight:800">See all Amata services</a>
-      {service.slug === 'pesticides-and-sprayers' && (
-        <span> · <a href="/shop/" style="color:#1D3FA8;font-weight:800">Browse shop products</a></span>
-      )}
     </div>
   </section>
 </ContentPage>

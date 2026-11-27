@@ -29,3 +29,6 @@ routes. Individual service detail pages are generated from
 `src/data/services.js` under `/services/<slug>/`. Confirm service scope,
 availability, pesticide details, preparation and safety instructions with the
 business before publishing.
+
+The Services overview and navigation use the 11 offerings shown on the
+company's services poster. Product enquiries remain on the separate Shop page.

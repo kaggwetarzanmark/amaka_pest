@@ -194,7 +194,7 @@ function removeQuotePhoneNumber(markup) {
 const pestIcon =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v9M9 11H6m12 0h-3M9 15H6m12 0h-3M10 6a2 2 0 1 1 4 0v10a2 2 0 0 1-4 0zM9 7 7 5m8 2 2-2"></path></svg>';
 
-const pestStrip = `<section style="background:#F7F5F2;padding:18px 0"><div class="w"><div role="list" aria-label="Pests we treat" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px">${['Cockroaches', 'Ants', 'Termites', 'Rats', 'Bed bugs', 'Spiders', 'Snakes']
+const pestStrip = `<section style="background:#F7F5F2;padding:18px 0"><div class="w"><div role="list" aria-label="Pests we treat" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px">${['Mosquitoes', 'Rodents', 'Snakes and reptiles', 'Cockroaches', 'Termites', 'Bed bugs', 'Crawling insects', 'Flying insects']
   .map(
     (pest) =>
       `<span role="listitem" style="display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid #E8E4DF;background:#fff;color:#0A1B44;font-size:14px;font-weight:700;white-space:nowrap">${pestIcon}${pest}</span>`,
@@ -209,10 +209,9 @@ const faqSection = `<section style="background:#fff;padding:72px 0"><div class="
 
 const approvedCopy = [
   ['Pest control in Kisasi, Kampala', 'Pest Control and Fumigation Across Uganda'],
-  ['Pest control and fumigation', 'Fumigation and pest control'],
-  ['Rodent management', 'Rodent control'],
-  ['Pesticide sales', 'Pesticides and sprayers'],
-  ['Feminine sanitary hygiene', 'Sanitary bin and washroom hygiene'],
+  ['Rodent management', 'Rodent management'],
+  ['Snake and lizard control', 'Snake and reptiles control'],
+  ['Staff training', 'Consultancy and training'],
   [
     'Pest control and fumigation for homes, hotels and businesses in Kisasi and Kampala.',
     'Pest control and fumigation for homes, hotels and businesses across Uganda, including Kampala and surrounding areas. You get a clear price before any work begins.',
@@ -224,27 +223,27 @@ const approvedCopy = [
   ],
   [
     'Fumigation and pest control options for cockroaches, bed bugs, ants, mosquitoes and termites in homes, offices, hotels and schools.',
-    'Remove cockroaches, bed bugs, ants, mosquitoes and termites from your home, office, hotel or school.',
+    'Ask about separate mosquito, cockroach, termite, bed bug and crawling or flying insect control services.',
   ],
   [
     'Rat and mouse control with inspection, baiting options and practical advice on entry points.',
-    'Rat and mouse removal with baiting, traps and sealing of entry points, so they stay out.',
+    'Discuss rodent activity and site-specific management options for your property.',
   ],
   [
     'Pest assessment and control options for snakes and lizards around compounds, roofs and gardens.',
-    'Safe removal and prevention around compounds, roofs and gardens.',
+    'Contact the team about snake and reptile sightings and confirm local service availability.',
   ],
   [
     'Pesticides and sprayers for home, farm and commercial pest-control needs. Contact us for current stock and pricing.',
-    'Quality products for home, farm and business use. Call for stock and prices.',
+    'Shop pesticides and sprayers; contact us to confirm product options, labels, stock and pricing.',
   ],
   [
     'Discreet sanitary-bin and washroom hygiene services for offices, hotels and other workplaces.',
-    'A discreet, regular service for offices, hotels and workplaces.',
+    'Ask about cleaning, disinfecting and dressing sanitary bins in ladies’ washrooms.',
   ],
   [
     'Pest prevention and hygiene training for hotel, restaurant and facility teams.',
-    'Teach your team to spot pests early and keep spaces clean.',
+    'Consultancy and training for hotel staff on identifying pests and practical prevention.',
   ],
   ['How it works', 'Three steps. No surprises.'],
   [
@@ -341,6 +340,14 @@ export function applyWebsiteCopy(markup) {
 
   for (const [source, copy] of approvedCopy) {
     updatedMarkup = updatedMarkup.replaceAll(source, copy);
+  }
+
+  for (const [source, copy] of [
+    [/(<h3\b[^>]*>)Pest control and fumigation(<\/h3>)/, '$1General fumigation$2'],
+    [/(<h3\b[^>]*>)Pesticide sales(<\/h3>)/, '$1Shop pesticides and sprayers$2'],
+    [/(<h3\b[^>]*>)Feminine sanitary hygiene(<\/h3>)/, '$1Sanitary feminine hygiene$2'],
+  ]) {
+    updatedMarkup = updatedMarkup.replace(source, copy);
   }
 
   updatedMarkup = updatedMarkup.replaceAll(

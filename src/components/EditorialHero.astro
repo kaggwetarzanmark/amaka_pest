@@ -1,7 +1,7 @@
 ---
 import ImagePlaceholder from './ImagePlaceholder.astro';
 
-const { eyebrow, title, description, imageLabel, imageSrc, imageAlt } = Astro.props;
+const { eyebrow, title, description, imageLabel, imageSrc, imageAlt, imageFit = 'cover' } = Astro.props;
 ---
 
 <section class="editorial-hero" aria-labelledby="editorial-hero-title">
@@ -22,11 +22,14 @@ const { eyebrow, title, description, imageLabel, imageSrc, imageAlt } = Astro.pr
     </div>
     {imageSrc ? (
       <img
-        class="editorial-hero__image"
+        class:list={[
+          'editorial-hero__image',
+          imageFit === 'contain' && 'editorial-hero__image--contain',
+        ]}
         src={imageSrc}
         alt={imageAlt ?? imageLabel}
-        width="1344"
-        height="756"
+        width="1280"
+        height="800"
         loading="eager"
         fetchpriority="high"
         decoding="async"
@@ -131,6 +134,11 @@ const { eyebrow, title, description, imageLabel, imageSrc, imageAlt } = Astro.pr
     aspect-ratio: 16 / 10;
     height: auto;
     object-fit: cover;
+  }
+
+  .editorial-hero__image--contain {
+    background: #fff;
+    object-fit: contain;
   }
 
   .editorial-hero__stripe {

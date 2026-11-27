@@ -1,10 +1,10 @@
 const serviceHeadingLinks = [
-  ['Fumigation and pest control', 'fumigation-pest-control'],
-  ['Rodent control', 'rodent-control'],
-  ['Snake and lizard control', 'snake-and-lizard-control'],
-  ['Pesticides and sprayers', 'pesticides-and-sprayers'],
-  ['Sanitary bin and washroom hygiene', 'sanitary-bin-hygiene'],
-  ['Staff training', 'staff-training'],
+  ['General fumigation', '/services/fumigation-pest-control/'],
+  ['Rodent management', '/services/rodent-control/'],
+  ['Snake and reptiles control', '/services/snake-and-lizard-control/'],
+  ['Shop pesticides and sprayers', '/shop/'],
+  ['Sanitary feminine hygiene', '/services/sanitary-bin-hygiene/'],
+  ['Consultancy and training', '/services/staff-training/'],
 ];
 
 export function linkServiceHeadings(markup) {
@@ -20,7 +20,7 @@ export function linkServiceHeadings(markup) {
 
     updatedMarkup = updatedMarkup.replace(
       headingPattern,
-      `$1<a href="/services/${slug}/" style="color:inherit;text-decoration:underline;text-decoration-color:#C8102E;text-underline-offset:4px">${heading}</a>$2`,
+      `$1<a href="${slug}" style="color:inherit;text-decoration:underline;text-decoration-color:#C8102E;text-underline-offset:4px">${heading}</a>$2`,
     );
   }
 
